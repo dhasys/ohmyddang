@@ -1,0 +1,53 @@
+{% include "header.html" %}
+<body> 
+{% include "top.html" %}
+{% include "left.html" %}
+  <div id="contents">
+    <h1>알림목록</h1>
+    <table class="tbl">
+      <colgroup>
+        <col width="*" />
+        <col width="190px" />
+		<col width="150px" />
+      </colgroup>
+      <tr>
+        <th class="first">알림내용</th>
+        <th>발송상태</th>
+		<th>기능</th>
+      </tr>
+      {% for item in documents %}
+      <tr>
+        <td class="first Lft"><a href="/push/detail/{{ item.id }}">{{ item.contents|truncatechars:35 }}</a></td>
+        <td>{{ item.activated_date_time|date:"Y.m.d A h:i" }} | {% if item.date_status == 0 %}발송예정{%else%}발송완료{%endif%}</td>
+		<td>
+			{% if item.date_status == 0 %}
+			<input type="button" class="btn_gray_h22 w70" value="바로발송" onclick="location.href = '/push/resent/{{ item.id }}'"/>
+			<input type="button" class="btn_gray_h22 w50" value="삭제" onclick="location.href='/delete/push/{{ item.id }}'" />
+			{% endif %}
+
+		</td>
+      </tr>
+      {% endfor %} 
+    </table>
+	<div class="bnarea">		
+		<div class="floatRight">
+			{% if request.user.is_staff %}
+			<input type="button" class="btn_orange_h28 w90" value="알림작성" onclick="location.href='/push/register'"/>
+			{% endif %}
+		</div>
+		<div class="paging">
+			<span class="btn"><a href="/push/list/page/{{ start_page }}"><img src="/static/img/page_left.png" />&nbsp;첫페이지</a></span>
+			{% for item in paging_list %}
+				{% if current_page = item %}<span><strong>{{ item }}</strong></span>
+				{% else %}<span><a href="/push/list/page/{{ item }}">{{ item }}</a></span>
+				{% endif %}
+			{% endfor %}
+			<span class="btn"><a href="/push/list/page/{{ end_page }}">끝페이지&nbsp;<img src="/static/img/page_right.png" /></a></span>
+		</div>
+	</div>
+  </div>
+</div>
+{% include "footer.html" %}
+</body>
+</html>
+

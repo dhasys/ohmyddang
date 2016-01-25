@@ -1,0 +1,51 @@
+{% include "header.html" %}
+<body> 
+{% include "top.html" %}
+{% include "left.html" %}
+<form id="notice_register_form" action="/notice/register/save/" method="post" autocomplete="off">
+{% csrf_token %}
+<input type="hidden" id="n_id" name="n_id" value= "{{ n_obj.id }}" />
+  <div id="contents">
+    <h1>공지사항 작성</h1>
+    <table class="tbl">
+      <colgroup>
+        <col width="173px" />
+        <col width="*">
+      </colgroup>
+      <tr>
+        <th class="first th_border2 Lft"><strong>제목입력</strong></th>
+        <td class="Lft">
+          <label>
+            <input type="text" class="text w500" name="title" id="notice_title" value="{{ n_obj.title }}"/>
+          </label>
+        </td> 
+      </tr>
+      <tr>
+        <th class="first th_border2 Lft"><strong>내용입력</strong></th>
+        <td class="Lft">
+          <textarea type="text" rows="12" class="text w500" id="notice_contents" name="contents"/>{{ n_obj.contents }}</textarea><br>
+          {% if n_obj %}
+            <input type="checkbox" name="display_flag" {% if n_obj.display_flag == 1 %} checked="checked" {% else %}{% endif %} /> APP 초기화면 노출
+          {% else %}
+            <input type="checkbox" name="display_flag"/> APP 초기화면 노출
+          {% endif %}
+        </td> 
+      </tr>    
+    </table>  
+    <div class="bnarea">
+      <div class="floatRight">
+		    <input type="submit" class="btn_orange_h28 w90" value="저장" />
+        {% if n_obj %}
+        <input type="button" class="btn_gray_h28 w50" value="취소" onclick="location.href='/notice/detail/{{ n_obj.id }}'"/>        
+        {% else %}
+        <input type="button" class="btn_gray_h28 w50" value="취소" onclick="location.href='/notice/list'"/>        
+        {% endif %}
+      </div>
+    </div>    
+  </div>
+</div>
+</form>
+{% include "footer.html" %}
+</body>
+</html>
+

@@ -1,0 +1,201 @@
+{% include "header.html" %}
+<script>
+	var __g_form_coupon_date_arr = ['start_y', 'start_m', 'start_d', 'end_y', 'end_m', 'end_d'];
+	function toggle(value){
+		var today_year = {{today|date:"Y"}};
+		var today_month = {{today|date:"m"}};
+		var today_day = {{today|date:"d"}};	
+
+		if(value==0){
+			$("#week_box").hide();
+
+			$.each(__g_form_coupon_date_arr, function(i, v){
+				$("#" + v).attr('disabled', 'disabled');
+			});
+
+			$("#week_box>input").each(function(i, v){
+				$(v).attr('checked', 'checked');
+			});
+
+		}else if(value==1){
+			$("#week_box").show();
+			$.each(__g_form_coupon_date_arr, function(i, v){
+				$("#" + v).removeAttr('disabled');
+			});
+		}
+	}
+
+	function discountToggle(value){
+		if(value==0){
+			$('#discount_types1').show();
+			$('#discount_types2').hide();
+		}else if(value==1){
+			$('#discount_types2').show();
+			$('#discount_types1').hide();
+		}
+	}
+
+	function delete_pictures(val){
+	    if(confirm('삭제하시겠습니까?')){
+	      $("#coupon_image").remove();
+	      $("#coupon_image_input").removeAttr('disabled').css('visibility', 'visible');
+	      $("#coupon_photo_disc").removeAttr('disabled').css('visibility', 'visible');
+	      $("#del_pic").val(1);
+	    }
+  	}
+
+  	function validate_week(){
+  		result = true;
+  		if($('#time_type').val() == 0){
+  			var check_list = $(":checkbox[name='week']:checked")
+  			if(check_list.length == 0){
+  				alert('하나이상의 요일을 선택해주세요');
+  				result = false;
+  			}
+  		}
+  		return result
+  	}
+
+	function validate_coupon_save(){
+		
+		if(!validate_coupon_register()){
+			return false;
+		}		
+		
+		$.each(__g_form_coupon_date_arr, function(i, v){
+			$("#" + v).removeAttr('disabled');
+		});
+
+		return true;
+	}
+	
+	
+
+	function validate_coupon_time(){
+		
+		return true;
+	}
+
+	function calc_discount(){
+		var is_numeric = true;
+		var pattern = /([^0-9])/;
+		var original_price = $("#original_price").val();
+		var discount_price = $("#discount_price").val();
+
+		if(pattern.test(original_price)){
+			is_numeric = false;
+		}
+
+		if(pattern.test(discount_price)){
+			is_numeric = false;
+		}
+
+		if(is_numeric){
+			if(original_price.length==0||discount_price.length==0) return;
+
+			original_price = parseInt(original_price);
+			discount_price = parseInt(discount_price);
+			var discount_rate = parseInt((original_price  - discount_price)/original_price * 100);
+			$("#discount_rate").text(discount_rate + "%");
+		}else{
+			$("#discount_rate").text("ERROR");
+		}
+	}
+
+	{% if c_id > 0 %}
+		$(window).load(function(){
+			if({{coupon.discount_percentage}} == 0){
+				discountToggle(0);
+				$('#discount_radio0').attr("checked", true);
+				calc_discount();
+			}else{
+				discountToggle(1);
+				$('#discount_radio1').attr("checked", true);
+			}
+		});
+	{% endif %}
+</script> 
+<body> 
+{% include "top.html" %}
+{% include "left.html" %}
+
+<form id="coupon_register_form" action="/coupon/register/save/" method="post" autocomplete="off" enctype="multipart/form-data" onsubmit="return validate_coupon_save();">
+{% csrf_token %}
+<input type="hidden" id="form_type" name="form_type" value= "{{ mode }}" />
+<input type="hidden" id="c_id" name="c_id" value= "{{ c_id }}" />
+<input type="hidden" id="act_date" name="act_date" />
+<input type="hidden" id="exp_date" name="exp_date" />
+<input type="hidden" id="del_pic" name="del_pic" />
+<input type="hidden" id="store_id" name="store_id" value="{{store.id}}" />
+
+  <div id="contents">
+    <h1>쿠폰관리 - {%if coupon.id > 0 %}수정{% else %}등록{% endif %}</h1>
+    
+    
+	
+    <table class="tbl">
+      <colgroup>
+        <col width="173px" />
+        <col width="*">
+      </colgroup>
+      <tr>
+        <th class="first th_border2 Lft"><strong class="point">쿠폰명</strong></th>
+        <td class="Lft"><input type="text" class="text w150" name="coupon_name" value="{{coupon.name}}"/></td> 
+      </tr>
+      <tr>
+        <th class="first th_border2 Lft"><strong>쿠폰 소개글</strong></th>
+        <td class="Lft">  <textarea type="text" rows="3" class="text w500" name="description" id="description" />{{ coupon.description }}</textarea><br></td> 
+      </tr>
+      <tr>
+        <th class="first th_border2 Lft"><strong class="point">쿠폰개수</strong></th>
+        <td class="Lft"><input type="text" class="text w100" id="coupon_count" name="coupon_count" value="{{coupon.count}}" />{% if subscription == 1 %}  정액제상품 이용중입니다.{%else%}&nbsp;&nbsp;등록가능 쿠폰 : {{available_cnt}} 개{%endif%}</td> 
+      </tr>
+      <tr>
+      	<th class="first th_border2 Lft"><strong class="point">할인방식선택</strong></th>
+      	<td class="Lft">
+      	<div>
+			&nbsp;
+			<input type="radio" id="discount_radio0" name="discount_type" value="0" onclick="discountToggle(0);" {% if c_id == 0 %} checked {% endif %}/>
+			가격기준&nbsp;&nbsp;
+			<input type="radio" id="discount_radio1" name="discount_type" value="1" onclick="discountToggle(1);" />
+			할인율기준&nbsp;&nbsp;
+		</div>
+		<div id="discount_types1" {% if c_id != 0 %} style="display:none;" {% endif %}>
+			판매원가 : <input type="text" class="text w90" id="original_price" name="original_price" value="{{coupon.original_price}}" onkeyup="calc_discount()"> 원 &nbsp;&nbsp;&nbsp;&nbsp;
+			할인가 : <input type="text" class="text w90" id="discount_price" name="discount_price" value="{{coupon.discount_price}}" onkeyup="calc_discount()"> 원 <br>
+			할인율 : <b id="discount_rate">0%</b> <br>			
+		</div>
+		<div id="discount_types2"  style="display:none;">
+			할인율 : <input type="text" class="text w50" id="discount_percentage" name="discount_percentage" value="{{coupon.discount_percentage}}"> % <br>
+			<span class="red">모든상품에 대한 할인율 입니다.</span>
+		</div>
+		</td>
+	  </tr>
+	  <tr>
+        <th class="first th_border2 Lft"><strong >쿠폰이미지등록</strong></th>
+        <td class="Lft vertical_t">          
+		  <div>
+            <div class="coupon_photo" id="coupon_image">
+	         	{%if coupon.image %}<img src="{{ coupon.image.original_image.url}}" class="coupon_img"><a onclick="delete_pictures()"><img src="/static/img/del_photo.png" class="del_photo"></a>{%endif%}
+            </div>
+				<div class="coupon_photo_disc" id="coupon_photo_disc" {% if coupon.image %} style="visibility:hidden;" disabled {% endif %}><b>사진 사이즈 안내</b><br>사용자 앱화면에서 보일 쿠폰 소개이미지 입니다.<br>정확한 쿠폰 소개를 위하여 720x450(픽셀)의 이미지 사용을 권장합니다.<br><span class="fontsize11 red">(이미지가 있는 상태에서 새로 업로드 하시면 기존 사진은 삭제 됩니다)</span></div>
+	        </div>
+			<div>
+	        	<input type="file" id="coupon_image_input" name="picture" class="text w300" {% if coupon.image %} style="visibility:hidden;" disabled{%endif%} />
+	        </div>
+        </td> 
+      </tr>      
+    </table>
+    <div class="bnarea">
+	  <div class="floatRight">
+        <input type="submit" class="btn_gray_h28 w90" value="저장" />
+        <input type="button" class="btn_gray_h28 w90" value="취소" onclick="location.href='/coupon/list/publish'"/>
+      </div>
+    </div>    
+  </div>
+</div>
+</form>
+{% include "footer.html" %}
+</body>
+</html>
+

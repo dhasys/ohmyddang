@@ -1,0 +1,38 @@
+{% include "header.html" %} 
+<body>
+{% include "top.html" %} 
+{% include "left.html" %} 
+  <form id="board_reply_register_form" action="/board/reply/save/" method="post" autocomplete="off">
+  {% csrf_token %}
+  <input type="hidden" id="b_id" name="b_id" value="{{ b_obj.id }}" />
+  <div id="contents">
+    <h1>고객센터 답변</h1>
+    <table class="tbl">
+      <colgroup>
+        <col width="*" />
+        <col width="110" />
+		    <col width="90" />
+      </colgroup>
+      <tr>
+        <th class="first Lft">{{ b_obj.title }}</th>
+		    <th>{{ store.store_name }}</th>
+        <th>{{ b_obj.regdate|date:"SHORT_DATE_FORMAT" }}</th>
+      </tr>       
+    </table>
+	<div class="tblview">{{ b_obj.contents }}</div>
+	<div class="tblview">
+      <textarea type="text" rows="6" class="text w700" name="reply_contents" id="reply_contents"/>{{ br_obj.contents }}</textarea><br>
+	</div>
+	<div class="bnarea">
+		<div class="floatRight">
+			<input type="submit" class="btn_orange_h28 w90" value="등록" />
+			<input type="button" class="btn_gray_h28 w50" value="취소" onclick="location.href='/board/detail/{{ b_id }}'"/>
+		</div>
+	</div>
+  </div>
+</div>
+</form>
+{% include "footer.html" %}
+</body>
+</html>
+

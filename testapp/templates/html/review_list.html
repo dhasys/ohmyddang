@@ -1,0 +1,48 @@
+{% include "header.html" %}
+<body>
+{% include "top.html" %}
+{% include "left.html" %}
+  <div id="contents">
+    <h1>리뷰관리</h1>
+    <table class="tbl">
+      <colgroup>
+        <col width="*" />
+        <col width="130px" />
+		    <col width="90px" />
+		    <col width="40px" />
+      </colgroup>
+      <tr>
+        <th class="first">내용</th>
+        <th>등록일</th>
+		    <th>글쓴이</th>
+		    <th>삭제</th>
+      </tr>
+      {% for item in documents %}
+      <tr>        
+        <td class="first Lft"><a href="/review/detail/{{ item.id }}">{{ item.contents }}</a></td>
+        <td>{{ item.regdate|date:"Y.m.d a h:i" }}</td>
+		    <td>{% if item.member %}{{ item.member.nickname }}{% else %}{{ item.name }}{% endif %}</td>
+		    <td><a href="/delete/StoreReview/{{ item.id }}">삭제</a></td>
+      </tr>
+      {% endfor %}      
+    </table>
+	<div class="bnarea">
+		<div class="floatRight">
+		  <input type="button" class="btn_orange_h28 w90" value="글쓰기" onclick="location.href='/review/register'"/>
+        </div>
+		<div class="paging">
+			<span class="btn"><a href="/review/list/page/{{ start_page }}"><img src="/static/img/page_left.png" />&nbsp;첫페이지</a></span>
+      {% for item in paging_list %}
+        {% if current_page = item %}<span><strong>{{ item }}</strong></span>
+        {% else %}<span><a href="/review/list/page/{{ item }}">{{ item }}</a></span>
+        {% endif %}
+      {% endfor %}
+			<span class="btn"><a href="/review/list/page/{{ end_page }}">끝페이지&nbsp;<img src="/static/img/page_right.png" /></a></span>
+		</div>
+	</div>
+  </div>
+</div>
+{% include "footer.html" %}
+</body>
+</html>
+

@@ -1,0 +1,50 @@
+[
+{
+	"store_id":"add1"
+	,"password":"1234"
+	,"store_name":"추가 상점1 - 김포국제공항"
+	,"president_name":"공항"
+	,"business_number":12341234
+	,"category":"서비스"
+	,"manager_name":"신지드"
+	,"manager_phone":"1234-1234"
+	,"address":"서울시 강서구 방화동"
+	,"description":"이 상점에 대한 설명입니다."
+	,"latitude":37.558819
+	,"longitude":126.803008
+	,"dayoff":"금"
+	,"open_time":"0200"
+	,"close_time":"2400"
+	,"email":"sunken37@gmail.com"
+	,"prime_image":"file:///Users/sunken37/Desktop/image/8.jpg"
+	,"pictures_images":["file:///Users/sunken37/Desktop/image/1.jpg"
+						,"file:///Users/sunken37/Desktop/image/4.jpg"
+						,"file:///Users/sunken37/Desktop/image/8.jpg"
+						,"file:///Users/sunken37/Desktop/image/9.jpg"
+						,"file:///Users/sunken37/Desktop/image/11.jpg"]
+},
+{
+	"store_id":"add2"
+	,"password":"1234"
+	,"store_name":"추가 상점2 - 봉주르"
+	,"president_name":"논산"
+	,"business_number":12341234
+	,"category":"서비스"
+	,"manager_name":"잔나"
+	,"manager_phone":"031) 1234-1234"
+	,"address":"경기도 남양주시 조안면 능내리"
+	,"description":"이 상점에 대한 설명입니다."
+	,"latitude":37.523613
+	,"longitude":127.289348
+	,"dayoff":"일"
+	,"open_time":"1000"
+	,"close_time":"2400"
+	,"email":"sunken37@gmail.com"
+	,"prime_image":"file:///Users/sunken37/Desktop/image/11.jpg"
+	,"pictures_images":["file:///Users/sunken37/Desktop/image/3.jpg"
+						,"file:///Users/sunken37/Desktop/image/4.jpg"
+						,"file:///Users/sunken37/Desktop/image/5.jpg"
+						,"file:///Users/sunken37/Desktop/image/8.jpg"
+						,"file:///Users/sunken37/Desktop/image/10.jpg"]
+}
+]

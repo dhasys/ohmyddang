@@ -1,0 +1,145 @@
+{% include "header.html" %}
+ 
+<body>
+ 
+<!-- top -->
+<div id="top">
+  <div>
+    <div class="logo"><img src="/static/img/top_logo.png" /></div>
+    <div class="log_area">
+      <strong><a href="#">홍길동</a></strong>님 <span>|</span>&nbsp;<a href="#"><img src="/static/img/log_out.png" align="top" /></a>
+    </div>    
+  </div>
+</div>
+<!-- body  -->
+<div id="wrap">
+  <div id="left">
+    <ul><a href="#">가맹점관리</a></ul>
+	<ul><a href="#">공지사항</a></ul>
+	<ul><a href="#">알림</a></ul>
+	<ul><a href="#">고객센터</a></ul>
+	<ul class="sel">일반회원관리</ul>
+	<ul><a href="#">결제정보</a></ul>
+	<ul><a href="#">포인트관리</a></ul>
+    <ul><a href="#">전체통계</a></ul>
+	<ul><a href="#">가맹점별통계</a></ul>
+  </div>
+  <!-- 현재영역까지 GNB -->
+
+  <!-- 본문 -->
+  <div id="contents">
+    <h1>일반회원관리 - 정보수정</h1>
+    <table class="tbl">
+      <colgroup>
+        <col width="173px" />
+        <col width="*">
+      </colgroup>
+      <tr>
+        <th class="first th_border2 Lft"><strong>ID</strong></th>
+        <td class="Lft">
+          <label>
+            <input type="text" class="text w150" value="1234567890abcdef"/>
+          </label>
+        </td> 
+      </tr>
+      <tr>
+        <th class="first th_border2 Lft"><strong>닉네임</strong></th>
+        <td class="Lft">
+          <label>
+            <input type="text" class="text w150" value="abcdef"/>
+          </label>
+        </td> 
+      </tr>
+      <tr>
+        <th class="first th_border2 Lft"><strong>성별</strong></th>
+        <td class="Lft">
+          <label>
+			  <select class="text w3">
+				<option>성별선택</option>
+				<option>여</option>
+				<option>남</option>
+			  </select>
+		  </label>
+        </td> 
+      </tr>
+      <tr>
+        <th class="first th_border2 Lft"><strong>생년월일</strong></th>
+        <td class="Lft">
+          <label>
+		  <select class="text w3">
+			<option>년</option>
+			<option>1900년</option>
+			<option>1901년</option>
+		  </select>
+		  <select class="text w3">
+			<option>월</option>
+			<option>01월</option>
+			<option>02월</option>
+		  </select>
+		  <select class="text w3">
+			<option>일</option>
+			<option>01일</option>
+			<option>02일</option>
+		  </select>
+		  </label>
+        </td> 
+      </tr>      
+      <tr>
+        <th class="first th_border2 Lft"><strong>가입일</strong></th>
+        <td class="Lft">
+          <label>
+		  <select class="text w3">
+			<option>년</option>
+			<option>1900년</option>
+			<option>1901년</option>
+		  </select>
+		  <select class="text w3">
+			<option>월</option>
+			<option>01월</option>
+			<option>02월</option>
+		  </select>
+		  <select class="text w3">
+			<option>일</option>
+			<option>01일</option>
+			<option>02일</option>
+		  </select>
+		  </label>
+        </td> 
+      </tr>
+      <tr>
+        <th class="first th_border2 Lft"><strong>쿠폰다운수</strong></th>
+        <td class="Lft">
+          <label>
+            <input type="text" class="text w150" value="1000"/>
+          </label>
+        </td> 
+      </tr>
+      <tr>
+        <th class="first th_border2 Lft"><strong>쿠폰사용수</strong></th>
+        <td class="Lft">
+          <label>
+            <input type="text" class="text w150" value="1000"/>
+          </label>
+        </td> 
+      </tr>
+      
+      
+      
+    </table>
+  <!-- //본문 -->
+  <!-- 버튼, 페이저 -->
+    <div class="bnarea">
+      <div class="floatRight">
+		<input type="button" class="btn_orange_h28 w90" value="저장" />
+        <input type="button" class="btn_gray_h28 w50" value="취소" />
+      </div>
+    </div>    
+  </div>
+</div>
+<!-- footer -->
+<div id="bottom">
+  <img src="/static/img/bottom_img.png" />
+</div>
+</body>
+</html>
+

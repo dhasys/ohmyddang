@@ -1,0 +1,58 @@
+{% include "header.html" %} 
+<body>
+{% include "top.html" %}   
+{% include "left.html" %} 
+  <div id="contents">
+    <h1>공지사항</h1>
+    <table class="tbl">
+      <colgroup>
+        <col width="*" />
+        <col width="150px" />
+      </colgroup>
+      <tr>
+        <th class="first">제목</th>
+        <th>날짜</th>
+      </tr>
+      {% for item in documents %}
+      <tr>
+        {% if item.display_flag == 1 %}
+        <td class="first Lft"><a href="/notice/detail/{{ item.id }}" class="starpoint">{{ item.title|truncatechars:50 }}</a></td>
+        {% else %}
+        <td class="first Lft"><a href="/notice/detail/{{ item.id }}" >{{ item.title|truncatechars:50 }}</a></td>
+        {% endif %}
+        <td>{{ item.regdate|date:"Y.n.d A h:i" }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+	<div class="bnarea">
+    <div class="floatRight">
+      {% if request.user.is_staff %}
+      <input type="button" class="btn_orange_h28 w90" value="글쓰기" onclick="location.href='/notice/register'"/>
+      {% endif %}
+    </div>
+		<div class="floatLeft">
+			<span class="fontsize11 font999 starpoint">초기화면 알림게시물</span>
+		</div>
+    {% if user.is_staff == true %}
+		<div class="floatRight">
+			<input type="button" class="btn_orange_h28 w90" value="공지등록" onclick="location.href='/notice/register'" />
+		</div>
+    {% endif %}
+		<div class="paging">
+			<span class="btn"><a href="/notice/list/page/{{ start_page }}"><img src="/static/img/page_left.png" />&nbsp;첫페이지</a></span>
+			{% for item in paging_list %}
+        {% if current_page = item %}
+        <span><strong>{{ item}}</strong></span>
+        {% else %}
+        <span><a href="/notice/list/page/{{ item }}">{{ item }}</a></span>
+        {% endif %}
+      {% endfor %}
+			<span class="btn"><a href="/notice/list/page/{{ end_page }}">끝페이지&nbsp;<img src="/static/img/page_right.png" /></a></span>
+		</div>
+	</div>
+  </div>
+</div>
+{% include "footer.html" %}
+</body>
+</html>
+

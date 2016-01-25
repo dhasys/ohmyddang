@@ -1,0 +1,54 @@
+{% include "header.html" %} 
+<body>
+{% include "top.html" %} 
+{% include "left.html" %} 
+  <div id="contents">
+    <h1>일반회원관리</h1>
+    <table class="tbl">
+      <colgroup>
+        <col width="*" />
+        <col width="130px" />
+		    <col width="130px" />
+		    <col width="90px" />
+		    <col width="90px" />
+      </colgroup>
+      <tr>
+        <th class="first">ID</th>
+        <th>닉네임</th>
+		    <th>가입일</th>
+		    <th>쿠폰다운수</th>
+		    <th>쿠폰사용수</th>
+      </tr>
+      {% for item in documents %}
+      <tr>
+        <td class="first Lft"><a href="/member/detail/{{ item.id }}">{{ item.udid }}</a> {%if item.is_fake_id %}(가짜회원){%endif%}</td>
+        <td>{{ item.nickname }}</td>
+		    <td>{{ item.regdate|date:"Y.n.d A h:i" }}</td>
+						<td>{{item.coupon_down_cnt}}</td>
+				    <td>{{item.coupon_used_cnt}}</td>
+      </tr>
+      {% endfor %}
+    </table>
+	<div class="bnarea">
+		<div class="floatRight">
+		  <input type="button" class="btn_orange_h28 w90" value="회원등록" onclick="location.href='/member/register'"/>
+    </div>
+		<div class="paging">
+			<span class="btn"><a href="/member/list/page/{{ start_page }}"><img src="/static/img/page_left.png" />&nbsp;첫페이지</a></span>
+        {% for item in paging_list %}
+        {% if current_page = item %}
+        <span><strong>{{ item}}</strong></span>
+        {% else %}
+        <span><a href="/member/list/page/{{ item }}">{{ item }}</a></span>
+        {% endif %}
+      {% endfor %}
+			<span class="btn"><a href="/member/list/page/{{ end_page }}">끝페이지&nbsp;<img src="/static/img/page_right.png" /></a></span>
+		</div>
+	</div>
+
+  </div>
+</div>
+{% include "footer.html" %} 
+</body>
+</html>
+

@@ -1,0 +1,16 @@
+<body>
+<div id="top">
+  <div>
+    <div class="logo"><a href="/"><img src="/static/img/top_logo.png" /></a></div>
+    <div class="log_area">
+    {% if user.is_authenticated %}
+      {{ user.username }}&nbsp;<span>|</span>&nbsp;
+      {%if request.session.admin_login %}
+        <img src="/static/img/log_out.png" align="top" onclick="store_logout_check();" id="logout_img"/>
+      {% else %}
+        <a href="/logout"><img src="/static/img/log_out.png" align="top" id="logout_img"/></a>
+      {% endif %}
+    {% endif %}
+    </div>    
+  </div>
+</div>

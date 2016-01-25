@@ -1,0 +1,32 @@
+{% include "header.html" %}
+<body>
+{% include "top.html" %}
+{% include "left.html" %}
+  <div id="contents">
+    <h1>공지사항 보기</h1>
+    <table class="tbl">
+      <colgroup>
+        <col width="*" />
+        <col width="110" />
+      </colgroup>
+      <tr>
+        <th class="first Lft">{{ notice.title }}</th>
+        <th>{{ notice.regdate|date:"SHORT_DATE_FORMAT" }}</th>
+      </tr>      
+    </table>
+	<div class="tblview">{{ notice.contents|linebreaksbr }}</div>
+	<div class="bnarea">
+		<div class="floatRight">
+			<input type="button" class="btn_gray_h28 w50" value="목록" onclick="location.href='/notice/list'" />
+      {% if user.is_staff == 1 %}
+			<input type="button" class="btn_gray_h28 w50" value="수정" onclick="location.href='/notice/modify/{{ notice.id }}'"/>
+			<input type="button" class="btn_gray_h28 w50" value="삭제" onclick="location.href='/delete/notice/{{ notice.id }}'"/>
+      {% endif %}
+		</div>
+	</div>
+  </div>
+</div>
+{% include "footer.html" %}
+</body>
+</html>
+

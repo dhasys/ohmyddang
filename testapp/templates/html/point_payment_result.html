@@ -1,0 +1,100 @@
+{% include "header.html" %} 
+{% if result == 'success' %}
+<script>
+$(document).ready(function() {
+  businessverify();
+});
+function businessverify() {
+  var tid_num = $('#tid').val();
+  setPGIOElement('apilog','100');
+  setPGIOElement('tid',tid_num);
+  verifyReceived("", 'after_success', 'after_fail');
+}
+
+function after_success(){
+  var tid = $('#tid').val();
+  var result = true
+  $.ajax({
+    type: 'GET',
+    url: '/api/s/payment/verify?tid=' + tid,
+    dataType: 'text',
+    success: function(data){
+      if(data!='success'){
+        alert(data);
+        result = false;
+      }
+    },
+    async: false
+  });
+  if(result == true){
+    location.href = '/point/payment/verify/success/';
+  }else{
+    location.href = '/point/failure/';
+  }
+
+}
+
+function after_fail(){
+  location.href = '/point/failure/';
+}
+</script>
+{% endif %}
+
+<body>
+{% if result == 'success' %}
+<table width="100%" height="100%" border="0">
+  <tr><td align="center">결제처리중...</td></tr>
+</table>
+<form name="PGIOForm" id="point_payment_form" >
+  {% csrf_token %}
+  <input type="hidden" name="mb_serial_no" />
+  <input type="hidden" name="mid" />
+  <input id="paymethod" type="hidden" name="paymethod" />
+  <input id="goodcurrency" type="hidden" name="goodcurrency" value="WON" />
+  <input id="langcode" type="hidden" name="langcode" value="KR" />
+  <input id="goodname" type="hidden" name="goodname" />
+  <input id="unitprice" type="hidden" name="unitprice" />
+  <input type="hidden" name="cardquota" />
+  <input type="hidden" name="cardexpiremonth" />
+  <input type="hidden" name="cardexpireyear" />
+  <input type="hidden" name="cardsecretnumber" />
+  <input type="hidden" name="cardownernumber" />
+  <input type="hidden" name="cardtype" />
+  <input type="hidden" name="cardnumber" />
+  <input type="hidden" name="cardauthcode" />
+  <input type="hidden" name="socialnumber" />
+  <input type="hidden" name="carrier" />
+  <input type="hidden" name="receipttotel" />
+  <input type="hidden" name="socialnumber" />  
+  <input id="receipttoemail" type="hidden" name="receipttoemail" />
+  <input id="receipttoname" type="hidden" name="receipttoname"  />
+  <input type="hidden" id="bill_id" name="bill_id" />
+  <input type="hidden" name="replycode" />
+  <input type="hidden" name="replyMsg" />
+  <input type="hidden" id="tid" name="tid" value="{{tid}}" />
+</form>
+{% else %}
+{% include "top.html" %} 
+{% include "left.html" %} 
+  <div id="contents">
+    {% if result == 'fail' %}
+    <h1>결제 실패</h1>    
+    <table width="400px" height="140" style="margin-top:150px; margin-left:auto; margin-right:auto; border:1px solid #bbb; background-color:#fafafa;">
+      <tr><td align="center" height="60"><span style="font-size:25pt;">결제중 오류가 발생하였습니다.<br>관리자에게 문의 바랍니다.</span><br></td></tr>
+      <tr><td align="center" height="40"><input type="button" class="btn_gray_h28 w90" value="결재내역" onclick="location.href='/point/list'"/> <input type="button" class="btn_gray_h28 w90" value="쿠폰관리" onclick="location.href='/coupon/list/publish'"/></td></tr>   
+    </table>
+    {% elif result == 'verify' %}
+    <h1>결제 완료</h1>
+    <table width="400px" height="140" style="margin-top:150px; margin-left:auto; margin-right:auto; border:1px solid #bbb; background-color:#fafafa;">
+      <tr><td align="center" height="60"><span style="font-size:16pt;">결제가 정상적으로 처리되었습니다.</span></td></tr>
+       <tr><td align="center" height="40"><input type="button" class="btn_gray_h28 w90" value="결재내역" onclick="location.href='/point/list'"/> <input type="button" class="btn_gray_h28 w90" value="쿠폰관리" onclick="location.href='/coupon/list/publish'"/></td></tr>
+    </table>
+    {% endif %}
+    <div class="bnarea"></div>  
+  </div>
+</div>
+{% include "footer.html" %} 
+{% endif %}
+</body>
+</html>
+

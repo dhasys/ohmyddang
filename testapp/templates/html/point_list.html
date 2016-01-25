@@ -1,0 +1,70 @@
+{% include "header.html" %} 
+<body> 
+{% include "top.html" %} 
+{% include "left.html" %} 
+  <div id="contents">
+    <h1>결제정보</h1>
+    <table class="tbl">
+      <colgroup>
+        <col width="*" />
+        <col width="130px" />
+		    <col width="130" />
+		    <col width="90px" />
+		    <col width="90px" />
+      </colgroup>
+      <tr>      	
+        {% if is_staff == 1 %}
+        <th class="first w150">가맹점</th>
+      	<th class = "w300">내용</th>     
+        {% elif is_staff ==  0 %}
+        <th class = "first">내용</th>     
+        {% endif %}
+        <th>결제요청일</th>
+		    <th>처리여부</th>
+		    <th>결제수단</th>
+      </tr>
+      {% for mybill in documents %}
+      <tr>     
+        {% if is_staff == 1 %}
+          <td class="first">{{mybill.store.store_name}}</td>
+          <td>          
+          {% elif is_staff == 0 %}
+            <td class = "first">          
+          {% endif %}
+          {% if mybill.expense_type == 0 %}
+            가입시 제공되는 기본포인트 : 5000p
+          {% else %}            
+            {{mybill.expense_price}} 원 ,
+              {% if mybill.expired_date  == None %}
+                {{mybill.point}} p                
+              {% else %}
+                {{mybill.point}} 일간  무제한 {%if mybill.expired_date %}({{mybill.activated_date|date:"Y.m.d"}} ~ {{mybill.expired_date|date:"Y.m.d"}})
+              {% endif %}
+          {% endif %}
+
+          {%endif%}
+       	  </td>
+  		    <td>{{mybill.regdate|date:"Y.m.d H:i"}}</td>
+  		    <td>{% if mybill.expense_type == 0 %} 기본제공 {% else %}{% if mybill.useable == 1 %} 완료 {%else%} 환불 {%endif%}{%endif%}</td>
+          <td class="w90">{% if mybill.expense_type == 0 %} - {% elif mybill.expense_type == 1 %}휴대폰결제{%elif mybill.expense_type == 2 %}신용카드결제{%elif mybill.expense_type == 3 %}실시간계좌이체{%endif%}</td>
+      </tr>
+      {% endfor %}
+	  <tr>    
+  </table>
+	<div class="bnarea">
+		<div class="paging">
+  		<span class="btn"><a href="/point/list/page/{{ start_page }}"><img src="/static/img/page_left.png" />&nbsp;첫페이지</a></span>
+  		{% for item in paging_list %}
+  			{% if current_page = item %}<span><strong>{{ item }}</strong></span>
+  			{% else %}<span><a href="/point/list/page/{{ item }}">{{ item }}</a></span>
+  			{% endif %}
+  		{% endfor %}
+  		<span class="btn"><a href="/point/list/page/{{ end_page }}">끝페이지&nbsp;<img src="/static/img/page_right.png" /></a></span>
+    </div>
+	</div>
+  </div>
+</div>
+{% include "footer.html" %} 
+</body>
+</html>
+

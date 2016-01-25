@@ -1,0 +1,40 @@
+{% include "header.html" %} 
+<script>
+  function toggle(value){
+  if(value=='show')
+   document.getElementById('setDateTime').style.display='block';
+  else
+   document.getElementById('setDateTime').style.display='none';
+}
+</script>
+<body>
+{% include "top.html" %} 
+{% include "left.html" %} 
+<input type="hidden" id="p_id" name="p_id" value="{{ p_obj.id }}" />
+  <div id="contents">
+    <h1>알림등록</h1>
+    <table class="tbl">
+      <colgroup>
+        <col width="135px" />
+        <col width="*" />
+      </colgroup>
+      <tr>
+        <th class="first Lft vertical_t2"><strong>내용</strong></td>
+        <td class="Lft">
+        {{push.contents|linebreaksbr}}
+      <!-- <textarea rows="2" class="text w500" name="contents"></textarea>  -->
+    </td>
+      </tr>
+    </table>
+  <div class="bnarea">    
+    <div class="floatRight">
+      {% if user.is_staff == 1 and date_status == 0 %}<input type="button" class="btn_gray_h28 w90" value="수정" onclick="location.href='/push/modify/{{push.id}}'" />{% endif %}
+      <input type="button" class="btn_gray_h28 w90" value="목록" onclick="location.href='/push/list'" />
+    </div>
+  </div>
+  </div>
+</div>
+{% include "footer.html" %}
+</body>
+</html>
+

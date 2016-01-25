@@ -1,0 +1,74 @@
+{% spaceless %}
+{% include "header.html" %}
+<script >
+function search_submit(){
+  $('#coupon_search_form').submit();
+}
+</script>
+ <body> 
+{% include "top.html" %}
+{% include "left.html" %}
+  <div id="contents">
+    <h1>상품관리</h1>
+	<ul class="Tabwrap" id="c_list_tabs">
+      {% if c_type == 'search' %}
+      <li class="{{ tab.search }}" id="search"> <a href="/coupon/list/search">검색결과상품</a></li>
+      {% else %}
+      <li class="{{ tab.publish }}" id="publish"><a href="/coupon/list/publish">발행중</a></li>
+      <li class="{{ tab.publishstop }}" id="publishstop"><a href="/coupon/list/publishstop">발행중지</a></li>
+      {% endif %}
+	  <div class="floatRight">
+		<form id="coupon_search_form" action="/coupon/list/search/" method="post" autocomplete="off"  >
+      	{% csrf_token %}
+        <input type="text" class="text w6" name="search_text" value=""/><input type="button" class="search_bn" style="margin-right:0 !important;" onclick="search_submit();"/>
+      </form>
+	  </div>
+
+    </ul>
+    <div class="Tabline"></div>
+	{% for item in documents %}
+	<div class="couponlist">  		
+		<img src="{{ item.image_url }}" class="coupon_img" onclick="location.href='/coupon/detail/{{ item.id }}'">
+		<div class="coupon_info">			
+			<b>[{% if tab.publishwait == 'on' %}발행대기{% elif tab.publish == 'on' %}발행중{% elif tab.publishstop == 'on' %}발행중지{% elif tab.registerwait == 'on' %}기존상품{% elif tab.search == 'on' %}{{item.coupon_status}}{% else %}  {% endif %}] {{ item.name }}</b><br>
+			{% if item.discount_percentage ==  0 %}
+				{{ item.original_price|floatformat }}원 > {{ item.discount_price|floatformat }}원<br>
+			{% else %}
+				할인율 : {{ item.discount_percentage}} %<br>
+			{% endif %}
+			{{ item.activated_date_time|date:"Y.m.d ah:i" }} ~ {{ item.expired_date_time|date:"Y.m.d ah:i" }} &nbsp; {{ item.new_week }}&nbsp;요일 &nbsp;<br>
+			다운 수 {{item.down_coupon_count}} / 남은쿠폰 {{ item.useable_coupon_count }}<br>
+		</div>
+		<div class="floatRight padding_t10">
+			{% if tab.publish == 'on' %}
+				<!-- <input type="hidden" id="coupon_id" name="coupon_id" value= "{{ item.id }}" />	 -->
+				<input type="submit" class="btn_gray_h22 w90" value="발행중지" onclick="location.href='/coupon/toggle/{{ item.id }}'"/>
+	       	{% endif %}
+	       	{% if tab.publishstop == 'on' %}
+		       	<input type="submit" class="btn_gray_h22 w90" value="재 발행" onclick="location.href='/coupon/toggle/{{ item.id }}'"/>
+	       	{% endif %}
+		</div>	
+	</div>
+	{% endfor %}
+	<div class="bnarea">
+		<div class="floatRight">
+			<input type="button" class="btn_orange_h28 w90" id="coupon_list_register"value="신규등록" onclick="location.href='/coupon/register'" />
+		</div>
+		<div class="paging">
+			<span class="btn"><a href="/coupon/list/{{ c_type }}/page/{{ start_page }}"><img src="/static/img/page_left.png" />&nbsp;첫페이지</a></span>
+			{% for item in paging_list %}
+        		{% if current_page = item %}
+				<span><strong>{{ item}}</strong></span>
+				{% else %}
+				<span><a href="/coupon/list/{{ c_type }}/page/{{ item }}">{{ item }}</a></span>
+				{% endif %}
+		      {% endfor %}
+			<span class="btn"><a href="/coupon/list/{{ c_type }}/page/{{ end_page }}">끝페이지&nbsp;<img src="/static/img/page_right.png" /></a></span>
+		</div>
+	</div>
+  </div>
+</div>
+{% include "footer.html" %}
+</body>
+</html>
+{% endspaceless %}

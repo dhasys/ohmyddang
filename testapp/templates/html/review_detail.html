@@ -1,0 +1,34 @@
+{% include "header.html" %}
+<body>
+{% include "top.html" %}
+{% include "left.html" %}
+<input type="hidden" id="r_id" name="r_id" value="{{ r_obj.id }}" />
+  <div id="contents">
+    <h1>리뷰관리 작성</h1>
+    <table class="tbl">
+      <colgroup>
+        <col width="173px" />
+        <col width="*">
+      </colgroup>
+      <tr>
+        <th class="first th_border2 Lft"><strong>작성자명</strong></th>
+        <td class="Lft">{% if review.member %}{{ review.member.nickname }}{% elif review.name %}{{ review.name }}{% endif %}</td> 
+      </tr>
+      <tr>
+        <th class="first th_border2 Lft"><strong>내용입력</strong></th>
+        <td class="Lft">{{ review.contents|linebreaksbr }}</textarea><br></td> 
+      </tr>      
+    </table>
+    <div class="bnarea">
+      <div class="floatRight">
+        <input type="button" class="btn_gray_h28 w50" value="목록" onclick="location.href='/review/list'"/>
+		    <input type="button" class="btn_gray_h28 w50" value="수정" onclick="location.href='/review/modify/{{ review.id }}'"/>        
+        <input type="button" class="btn_gray_h28 w50" value="삭제" onclick="location.href='/delete/StoreReview/{{ review.id }}'"/>
+      </div>
+    </div>    
+  </div>
+</div>
+{% include "footer.html" %}
+</body>
+</html>
+

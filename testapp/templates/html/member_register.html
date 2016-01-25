@@ -1,0 +1,71 @@
+{% include "header.html" %} 
+<body> 
+{% include "top.html" %} 
+{% include "left.html" %} 
+<form id="member_register_form" action="/member/register/save/" method="post" autocomplete="off">
+<input type="hidden" name="is_fake" value="1" />
+{% csrf_token %}
+<input type="hidden" id="m_id" name="m_id" value= "{{ member.id }}" />
+  <div id="contents">    
+    <h1>일반회원관리 - {% if member.id > 0 %}회원정보수정{% else %}신규등록{%endif%}</h1>
+    <table class="tbl">
+      <colgroup>
+        <col width="173px" />
+        <col width="*">
+      </colgroup>
+      <tr>
+        <th class="first th_border2 Lft"><strong>ID</strong></th>
+        <td class="Lft">{% if member.id > 0 %}{{ member.udid }}{% else %}<input type="text" class="text w150" name="member_id" value="">{% endif %}</td>
+      </tr>
+      <tr>
+        <th class="first th_border2 Lft"><strong>닉네임</strong></th>
+        <td class="Lft">{% if member.id > 0 %}{{ member.nickname }}{% else %}<input type="text" class="text w150" name="member_nickname" value="" />{%endif%}</td>
+      </tr>
+      <tr>
+        <th class="first th_border2 Lft"><strong>성별</strong></th>
+        <td class="Lft">
+    			  <select class="text w3" name="gender">
+              {% if member.gender == 1 %}<option value="1" selected="selected">여</option><option value="0">남</option>
+              {% elif member.gender == 0 %}<option value="1">여</option><option value="0" selected="selected">남</option>
+              {% else %}<option value="">성별</option><option value="1">여</option><option value="0">남</option>{% endif %}
+    			  </select>
+        </td> 
+      </tr>
+      <tr>
+        <th class="first th_border2 Lft"><strong>생년월일</strong></th>
+        <td class="Lft">
+          <label>
+      		  <select class="text w3" name="bir_year" id="birth_year">
+              {% for y in birth_years %}<option value="{{ y }}" {% if y == member.birthday|date:"Y" %}selected{%endif%} >{{ y }}년</option>{% endfor %}
+      		  </select>
+      		  <select class="text w3" name="bir_mon" id="birth_month">
+               {% for m in months %}<option value="{{ m }}" {% if m == member.birthday|date:"m" %}selected{%endif%} >{{ m }}월</option>{% endfor %}
+      		  </select>
+      		  <select class="text w3" name="bir_day" id="birth_day">
+               {% for d in days %}<option value="{{ d }}" {% if d == member.birthday|date:"d" %}selected{%endif%} >{{ d }}일</option>{% endfor %}
+      		  </select>
+  		    </label>
+        </td> 
+      </tr>       
+      <tr>
+        <th class="first th_border2 Lft"><strong>쿠폰다운수</strong></th>
+        <td class="Lft"><input type="text" class="text w150" id="member_coupon_down_count" name="member_coupon_down_count" value="{{coupon_down_cnt}}" {% if member.is_fake_id == 0%} readonly {% endif %}/></td> 
+      </tr>
+      <tr>
+        <th class="first th_border2 Lft"><strong>쿠폰사용수</strong></th>
+        <td class="Lft"><input type="text" class="text w150" id="member_coupon_use_count" name="member_coupon_use_count" value="{{coupon_used_cnt}}" {% if member.is_fake_id == 0%} readonly {% endif %} /></td> 
+      </tr> 
+    </table>
+    <div class="bnarea">
+      <div class="floatRight">
+    		<input type="submit" class="btn_orange_h28 w90" value="등록" />
+        	<input type="button" class="btn_gray_h28 w50" value="취소" onclick="location.href='/member/list'"/>
+      </div>
+    </div>    
+  </div>
+</div>
+</form>
+{% include "footer.html" %} 
+</body>
+</html>
+

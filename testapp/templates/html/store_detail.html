@@ -1,0 +1,133 @@
+{% include "header.html" %}
+<script >
+function store_login_check(){
+  var text = "{{store.store_name}}" + " 가맹점으로 로그인 하시겠습니까?"
+  if(confirm(text)){
+    location.href="/store/login/{{store.id}}"
+  }
+}
+
+function store_delete_check(){
+  if(confirm("모든정보가 삭제됩니다. 탈퇴하시겠겠습니까?")){
+    location.href = "/delete/store/{{ store.id }}"
+  }
+}
+</script>
+{% include "top.html" %}
+{% include "left.html" %}
+  <div id="contents">
+    <h1>가맹점 상세정보</h1>
+    <table class="tbl">
+      <colgroup>
+        <col width="173px" />
+        <col width="*">
+      </colgroup>
+      <tr>
+        <th class="first th_border2 Lft"><strong>아이디</strong></th>
+        <td class="Lft">{{ store.user.username }}</td> 
+      </tr>
+      <tr>
+        <th class="first th_border2 Lft"><strong>연락처</strong></th>
+        <td class="Lft">{{ store.manager_phone }}</td> 
+      </tr>
+      <tr>
+        <th class="first th_border2 Lft"><strong>e-mail</strong></th>
+        <td class="Lft">{{ store.user.email }}</td> 
+      </tr>        
+     
+      <tr>
+        <th class="first th_border2 Lft"><strong>가맹점 명</strong></th>
+        <td class="Lft">{{ store.store_name }}</td> 
+      </tr>
+      <tr>
+        <th class="first th_border2 Lft"><strong>대표자 명</strong></th>
+        <td class="Lft">{{ store.president_name }}</td> 
+      </tr>
+      <tr>
+        <th class="first th_border2 Lft"><strong>사업자등록번호</strong></th>
+        <td class="Lft">{{ store.business_number|slice:":3" }}-{{ store.business_number|slice:"3:5" }}-{{ store.business_number|slice:"5:" }}</td> 
+      </tr>
+      
+            
+      <tr>
+        <th class="first th_border2 Lft"><strong>은행코드</strong></th>
+        <td class="Lft">{{ store.bank_code }}</td> 
+      </tr>
+      
+      <tr>
+        <th class="first th_border2 Lft"><strong>계좌번호</strong></th>
+        <td class="Lft">{{ store.bank_number }}</td> 
+      </tr>
+      
+      <tr>
+        <th class="first th_border2 Lft"><strong>예금주</strong></th>
+        <td class="Lft">{{ store.bank_name }}</td> 
+      </tr>
+      
+      
+      <tr>
+        <th class="first th_border2 Lft"><strong>스토어타입</strong></th>
+        <td class="Lft">{{ store.store_type }}</td> 
+      </tr>
+       
+      
+      <tr>
+        <th class="first th_border2 Lft"><strong>보유포인트</strong></th>
+        {% if store.activate_flag == 1 %}
+        <td class="Lft">{{sum_point}}</td>          
+        {% else %}
+          <td class="Lft"> 가입승인후 기본포인트가 제공됩니다.</td> 
+        {% endif %}
+      </tr>
+     
+      <tr>
+        <th class="first th_border2 Lft"><strong>대표사진</strong></th>
+        <td class="Lft vertical_t">          
+        <div>
+          {% if store.prime_image %}<div class="ms_photo"><img src="{{ store.prime_image.original_image.url }}"></div>{% endif %}
+        </div>
+        </td> 
+      </tr>      
+      <tr>
+        <th class="first th_border2 Lft"><strong>소개사진</strong></th>
+        <td class="Lft vertical_t">          
+		    <div>
+          {%for picture in store.pictures.all %}
+            <div class="ms_photo"><img src="{{ picture.original_image.url }}"></div>
+          {% endfor %}
+        </div>
+        </td> 
+      </tr>      
+    </table>
+    <div class="bnarea">
+  	  <div class="floatLeft">
+        {% if user.is_staff == 1 %}
+          {% if store.activate_flag == 1 %}
+          <input type="button" class="btn_gray_h28 w90" value="가맹점 삭제" onclick="location.href='/delete/store/{{ store.id }}'"/>
+          {% endif %}
+        {% else %}
+        <!-- <input type="button" class="btn_gray_h28 w90" value="가맹점 탈퇴" onclick="location.href='/delete/store/{{ store.id }}'"/> -->
+        <input type="button" class="btn_gray_h28 w90" value="가맹점 탈퇴" onclick="store_delete_check();"/>
+        {% endif %}
+      </div>
+      <div class="floatRight">
+        {% if store.activate_flag == 1 %}
+        <input id="store_detail_modify" type="button" class="btn_gray_h28 w90" value="정보수정" onclick="location.href='/store/modify/{{ store.id }}'" />
+        {% endif %}
+        {% if user.is_staff == 1 %}
+          <input id="store_detail_list" type="button" class="btn_gray_h28 w90" value="가맹점목록" onclick="location.href='/store/list'" />
+          {% if store.activate_flag == 0 %}      
+              <input id="store_detail_login" type="button" class="btn_orange_h28 w150" value="가입승인" onclick="location.href='/store/register/activate/{{ store.id }}'"/>
+          {% else %}
+            <input id="store_detail_login" type="button" class="btn_orange_h28 w150" value="가맹점 관리자로 로그인" onclick="store_login_check();"/>
+            <!-- <input id="store_detail_login" type="button" class="btn_orange_h28 w150" value="가맹점 관리자로 로그인" onclick="location.href='/store/login/{{store.id}}'"/> -->
+          {% endif %}
+        {% endif %}
+      </div>
+    </div>    
+  </div>
+</div>
+{% include "footer.html" %}
+</body>
+</html>
+

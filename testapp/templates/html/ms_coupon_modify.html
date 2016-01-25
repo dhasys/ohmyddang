@@ -1,0 +1,238 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>퍼닝-관리자시스템</title>
+<link rel="stylesheet" href="/static/css/style.css" />
+
+<script>
+function toggle(value){
+	if(value=='show1'){
+	 document.getElementById('setDateTime1').style.display='block';
+	 document.getElementById('setDateTime2').style.display='none';
+	 document.getElementById('setDateTime3').style.display='none';
+	 }
+	else if(value=='show2'){
+	 document.getElementById('setDateTime1').style.display='none';
+	 document.getElementById('setDateTime2').style.display='block';
+	 document.getElementById('setDateTime3').style.display='none';
+	 }
+	else if(value=='show3'){
+	 document.getElementById('setDateTime1').style.display='none';
+	 document.getElementById('setDateTime2').style.display='none';
+	 document.getElementById('setDateTime3').style.display='block';
+	 }
+}
+</script>
+ 
+</head>
+ 
+<body>
+ 
+<!-- top -->
+<div id="top">
+  <div>
+    <div class="logo"><img src="/static/img/top_logo.png" /></div>
+    <div class="log_area">
+      <strong><a href="#">홍길동</a></strong>님 <span>|</span>&nbsp;<a href="#"><img src="/static/img/log_out.png" align="top" /></a>
+    </div>    
+  </div>
+</div>
+<!-- body  -->
+<div id="wrap">
+  <div id="left">
+    <ul><a href="#">가맹점정보</a></ul>
+	<ul><a href="#">공지사항</a></ul>
+	<ul class="sel">쿠폰관리</ul>
+	<ul><a href="#">리뷰관리</a></ul>
+	<ul><a href="#">고객센터</a></ul>
+	<ul><a href="#">포인트구매</a></ul>
+	<ul><a href="#">통계</a></ul>
+  </div>
+  <!-- 현재영역까지 GNB -->
+
+  <!-- 본문 -->
+  <div id="contents">
+    <h1>쿠폰관리 - 등록</h1>
+    <table class="tbl">
+      <colgroup>
+        <col width="173px" />
+        <col width="*">
+      </colgroup>
+      <tr>
+        <th class="first th_border2 Lft"><strong class="point">쿠폰명</strong></th>
+        <td class="Lft">
+          <label>
+            <input type="text" class="text w150" value="케이크 할인쿠폰"/>
+          </label>
+        </td> 
+      </tr>
+      <tr>
+        <th class="first th_border2 Lft"><strong class="point">쿠폰 소개글</strong></th>
+        <td class="Lft">
+          <label>
+            <textarea type="text" rows="3" class="text w500" />케이크 할인쿠폰케이크 할인쿠폰케이크 할인쿠폰</textarea><br>
+          </label>
+        </td> 
+      </tr>
+      <tr>
+        <th class="first th_border2 Lft"><strong>발행방식선택</strong></th>
+        <td class="Lft">
+			<div>
+				<input type="radio" name="myradio" checked="checked" onclick="toggle('show1');">
+				즉시발행&nbsp;&nbsp;
+				<input type="radio" name="myradio" onclick="toggle('show2');">
+				일별발행&nbsp;&nbsp;
+				<input type="radio" name="myradio" onclick="toggle('show3');">
+				요일발행
+			</div>
+			<div id="setDateTime1">
+				<label>
+					시간설정&nbsp;
+					<select class="text w3">
+					<option>00시</option>
+					<option>01시</option>
+					</select>
+					<select class="text w3">
+					<option>00분</option>
+					<option>10분</option>
+					</select>&nbsp;~&nbsp;
+					<select class="text w3">
+					<option>00시</option>
+					<option>01시</option>
+					</select>
+					<select class="text w3">
+					<option>00분</option>
+					<option>10분</option>
+					</select>
+				</label>
+			</div>
+			<div id="setDateTime2" style="display:none;">
+				<label>
+					날짜설정&nbsp;
+					<select class="text">
+						<option>2012년</option>
+						<option>2013년</option>
+					</select>
+					<select class="text">
+						<option>00월</option>
+						<option>01월</option>
+					</select>
+					<select class="text">
+						<option>00일</option>
+						<option>10일</option>
+					</select>&nbsp;~&nbsp;
+					<select class="text">
+						<option>2012년</option>
+						<option>2013년</option>
+					</select>
+					<select class="text">
+						<option>00월</option>
+						<option>01월</option>
+					</select>
+					<select class="text">
+						<option>00일</option>
+						<option>10일</option>
+					</select><br>
+					시간설정&nbsp;
+					<select class="text w3">
+					<option>00시</option>
+					<option>01시</option>
+					</select>
+					<select class="text w3">
+					<option>00분</option>
+					<option>10분</option>
+					</select>&nbsp;~&nbsp;
+					<select class="text w3">
+					<option>00시</option>
+					<option>01시</option>
+					</select>
+					<select class="text w3">
+					<option>00분</option>
+					<option>10분</option>
+					</select>
+				</label>
+			</div>
+			<div id="setDateTime3" style="display:none;">
+				<label>
+					요일선택&nbsp;
+					<input type="checkbox">&nbsp;일
+					<input type="checkbox">&nbsp;월
+					<input type="checkbox">&nbsp;화
+					<input type="checkbox">&nbsp;수
+					<input type="checkbox">&nbsp;목
+					<input type="checkbox">&nbsp;금
+					<input type="checkbox">&nbsp;토<br>
+					시간설정&nbsp;
+					<select class="text w3">
+					<option>00시</option>
+					<option>01시</option>
+					</select>
+					<select class="text w3">
+					<option>00분</option>
+					<option>10분</option>
+					</select>&nbsp;~&nbsp;
+					<select class="text w3">
+					<option>00시</option>
+					<option>01시</option>
+					</select>
+					<select class="text w3">
+					<option>00분</option>
+					<option>10분</option>
+					</select>
+				</label>
+			</div>
+        </td> 
+      </tr>
+      <tr>
+        <th class="first th_border2 Lft"><strong>판매원가</strong></th>
+        <td class="Lft">
+          <label>
+            <input type="text" class="text w150"  value="20,000"/>
+          </label>
+        </td> 
+      </tr>
+      <tr>
+        <th class="first th_border2 Lft"><strong>할인가</strong></th>
+        <td class="Lft">
+          <label>
+            <input type="text" class="text w150"  value="10,000"/>
+			&nbsp;&nbsp;할인율 <b>50%</b> <!--- 판매원가 입력후 할인가 입력시 자동 계산하여 % 표시--->
+          </label>
+        </td> 
+      </tr>
+	  <tr>
+        <th class="first th_border2 Lft"><strong class="point">쿠폰이미지등록</strong></th>
+        <td class="Lft vertical_t">          
+		  <div>
+		  <!---업로드된 사진 리스트--->
+            <div class="coupon_photo"><img src="http://cafeptthumb2.phinf.naver.net/20120620_44/mihyun8309_1340169598460lEjLg_JPEG/%C1%DF%BA%B9%C4%ED%C6%F9%C7%D2%C0%CE.jpg?type=w740"></div> <!--- 프리뷰 이미지 사이즈 400x250 원본 이미지를 줄여서 사용--->
+			<div class="coupon_photo_disc"><b>사진 사이즈 안내</b><br>사용자 앱화면에서 보일 쿠폰 소개이미지 입니다.<br>정확한 쿠폰 소개를 위하여 720x450(픽셀)의 이미지 사용을 권장합니다.<br><span class="fontsize11 red">(이미지가 있는 상태에서 새로 업로드 하시면 기존 사진은 삭제 됩니다)</span></div>
+          </div>
+		  <div>
+            <input type="text" class="text w300" />
+			<input type="button" class="btn_gray_h22 w70" value="파일찾기" />
+			<input type="button" class="btn_orange_h22 w50" value="업로드" />
+          </div>
+        </td> 
+      </tr>
+      
+      
+    </table>
+  <!-- //본문 -->
+  <!-- 버튼, 페이저 -->
+    <div class="bnarea">
+	  <div class="floatRight">
+        <input type="button" class="btn_gray_h28 w90" value="저장" />
+        <input type="button" class="btn_gray_h28 w90" value="취소" />
+      </div>
+    </div>    
+  </div>
+</div>
+<!-- footer -->
+<div id="bottom">
+  <img src="/static/img/bottom_img.png" />
+</div>
+</body>
+</html>
+

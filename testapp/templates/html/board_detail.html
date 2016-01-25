@@ -1,0 +1,45 @@
+{% include "header.html" %}
+<body> 
+{% include "top.html" %}
+{% include "left.html" %}
+  <div id="contents">
+    <h1>고객센터 보기</h1>
+    <table class="tbl">
+      <colgroup>
+        <col width="*" />
+        <col width="110" />
+		    <col width="150" />
+      </colgroup>
+      <tr>
+        <th class="first Lft">{{ board.title }}</th>
+		    <th>{{ board.store.store_name }}</th>
+        <th>{{ board.regdate|date:"Y.n.d A h:i" }}</th>
+      </tr>      
+    </table>
+    <div class="tblview">{{ board.contents|linebreaksbr }}</div>
+    {% if board.reply_flag == 1 %}
+      <div class="tblview"><b>{{ board_reply.contents|linebreaksbr }}</b></div>
+    {% endif %}
+
+  <!-- 버튼, 페이저 -->
+	<div class="bnarea">
+		<div class="floatRight">
+      {% if user.is_staff == 1 %}
+          {% if board.reply_flag == 1 %}
+          <input type="button" class="btn_gray_h28 w70" value="답변수정" onclick="location.href='/board/reply/modify/{{ board.id }}'"/>
+          {% else %}
+          <input type="button" class="btn_gray_h28 w70" value="답변달기" onclick="location.href='/board/reply/{{ board.id }}'"/>
+          {% endif %}
+      {% endif %}
+      {% if user.is_staff == 0 and board.reply_flag == 0%}<input type="button" class="btn_gray_h28 w50" value="글수정" onclick="location.href='/board/modify/{{ board.id }}'"/>{% endif %}
+			<input type="button" class="btn_gray_h28 w50" value="목록" onclick="location.href='/board/list'"/>
+			<input type="button" class="btn_gray_h28 w50" value="글 삭제" onclick="location.href='/delete/board/{{ board.id }}'"/>
+		</div>
+	</div>
+  </div>
+</div>
+<!-- footer -->
+{% include "footer.html" %}
+</body>
+</html>
+

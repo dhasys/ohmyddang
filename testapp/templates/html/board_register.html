@@ -1,0 +1,46 @@
+{% include "header.html" %} 
+<body>
+{% include "top.html" %} 
+{% include "left.html" %} 
+<form id="board_register_form" action="/board/register/save/" method="post" autocomplete="off">
+{% csrf_token %}
+<input type="hidden" id="b_id" name="b_id" value="{{ b_obj.id }}" />
+  <div id="contents">
+    <h1>고객센터 작성</h1>
+    <table class="tbl">
+      <colgroup>
+        <col width="173px" />
+        <col width="*">
+      </colgroup>
+      <tr>
+        <th class="first th_border2 Lft"><strong>제목입력</strong></th>
+        <td class="Lft">  
+          <label>
+            <input type="text" class="text w500" id="board_title" name="title" value="{{ b_obj.title }}"/>
+          </label>
+        </td> 
+      </tr>
+      <tr>
+        <th class="first th_border2 Lft"><strong>내용입력</strong></th>
+        <td class="Lft">
+          <label>
+            <textarea type="text" rows="12" class="text w500" id="board_contents" name="contents"/>{{ b_obj.contents }}</textarea><br>
+          </label>
+        </td> 
+      </tr>      
+    </table>
+    <div class="bnarea">
+      <div class="floatRight">
+		<input type="submit" class="btn_orange_h28 w90" value="저장" />
+        <input type="button" class="btn_gray_h28 w50" value="취소" onclick="location.href='/board/list/'"/>
+      </div>
+    </div>    
+  </div>
+</div>
+</form>
+<div id="bottom">
+  <img src="/static/img/bottom_img.png" />
+</div>
+</body>
+</html>
+

@@ -1,0 +1,337 @@
+[
+{
+	"store_id":"nrise"
+	,"password":"1234"
+	,"store_name":"엔라이즈"
+	,"president_name":"김봉기"
+	,"business_number":12341234
+	,"category":"서비스"
+	,"manager_name":"코르키"
+	,"manager_phone":"1234-1234"
+	,"address":"서울시 강남구 역삼동 혜원빌딩"
+	,"description":"이 상점에 대한 설명입니다."
+	,"latitude":37.498589
+	,"longitude":127.042809
+	,"dayoff":"월, 화"
+	,"open_time":"1000"
+	,"close_time":"2200"
+	,"email":"sunken37@gmail.com"
+	,"prime_image":"http://25.media.tumblr.com/tumblr_m6d8phr3vn1qm3xk6o1_1280.jpg"
+	,"pictures_images":["http://25.media.tumblr.com/tumblr_m6d8phr3vn1qm3xk6o1_1280.jpg"
+						,"http://25.media.tumblr.com/tumblr_m6d8phr3vn1qm3xk6o1_1280.jpg"
+						,"http://25.media.tumblr.com/tumblr_m6d8phr3vn1qm3xk6o1_1280.jpg"
+						,"http://25.media.tumblr.com/tumblr_m6d8phr3vn1qm3xk6o1_1280.jpg"
+						,"http://25.media.tumblr.com/tumblr_m6d8phr3vn1qm3xk6o1_1280.jpg"]
+},
+{
+	"store_id":"nonsan"
+	,"password":"1234"
+	,"store_name":"논산집"
+	,"president_name":"논산"
+	,"business_number":12341234
+	,"category":"서비스"
+	,"manager_name":"울라프"
+	,"manager_phone":"02) 1234-1234"
+	,"address":"서울시 강남구 역삼동 논산집"
+	,"description":"이 상점에 대한 설명입니다."
+	,"latitude":37.499940
+	,"longitude":127.042849
+	,"dayoff":"월, 화"
+	,"open_time":"1000"
+	,"close_time":"2200"
+	,"email":"sunken37@gmail.com"
+	,"prime_image":"http://www.anyman.co.kr/Agent/uploaded/%EB%85%BC%EC%82%B0%EC%A7%91%EA%B0%84%ED%8C%901_201131172220.JPG"
+	,"pictures_images":["http://cfile6.uf.tistory.com/image/120847334F90C9B70DA82B"
+						,"http://postfiles12.naver.net/20110228_235/easytimes_1298883039989j9cnW_JPEG/%B3%ED%BB%EA%C1%FD-%B8%DE%B4%BA.jpg?type=w2"
+						,"http://cfile25.uf.tistory.com/image/144860374F688A220B6EDE"
+						,"http://www.monthlyphoto.com/images/webzine/%EB%85%BC%EC%82%B0%EC%A7%91.jpg"
+						,"http://cfile211.uf.daum.net/image/202771534E47B83B12F740"]
+},
+{
+	"store_id":"hyundai"
+	,"password":"1234"
+	,"store_name":"현대백화점(목동점)"
+	,"president_name":"목동현대"
+	,"business_number":12341234
+	,"category":"서비스"
+	,"manager_name":"다리우스"
+	,"manager_phone":"1234-1234"
+	,"address":"서울시 양천구 목동 현대백화점"
+	,"description":"이 상점에 대한 설명입니다."
+	,"latitude":37.527750
+	,"longitude":126.874618
+	,"dayoff":"월"
+	,"open_time":"1000"
+	,"close_time":"2200"
+	,"email":"sunken37@gmail.com"
+	,"prime_image":"http://www.beautysarangbang.com/board/rg4_board/down.php?&bbs_code=news1&page=9&bd_num=1358&key=0&mode=view"
+	,"pictures_images":["http://www.enesystem.co.kr/upload/ice_case/%ED%98%84%EB%8C%80%EB%B0%B1%ED%99%94%EC%A0%90%20%EC%A4%91%EB%8F%99%EC%A0%90.jpg"
+						,"http://www.womennews.co.kr/data/news/1018/a9-1.jpg"
+						,"http://218.234.17.120:8008/Uploads/Board/%EC%9D%BC%EC%82%B0%ED%82%A8%ED%85%8D%EC%8A%A4.jpg"
+						,"http://cfs11.tistory.com/image/24/tistory/2009/07/03/14/46/4a4d9b507903d"
+						,"http://cfile29.uf.tistory.com/image/1443363C5086F99C06A929"]
+},
+{
+	"store_id":"DEPLUG"
+	,"password":"1234"
+	,"store_name":"DEPLUG"
+	,"president_name":"DEPLUG"
+	,"business_number":12341234
+	,"category":"서비스"
+	,"manager_name":"누누"
+	,"manager_phone":"1234-1234"
+	,"address":"서울시 강남구 신사동 디플러그"
+	,"description":"이 상점에 대한 설명입니다."
+	,"latitude":37.520621
+	,"longitude":127.022595
+	,"dayoff":"토, 일"
+	,"open_time":"1000"
+	,"close_time":"2200"
+	,"email":"sunken37@gmail.com"
+	,"prime_image":"http://web.ivenue.com/northerncaliforniaglove/images/deplug.jpg"
+	,"pictures_images":["http://d27ylsxkm6728c.cloudfront.net/w/300/h/300/q/85/upload/images/extaudio/c67ce221-ef9c-479b-9383-1d2eab54390d.jpg"
+						,"http://i.ytimg.com/vi/7_oli3w2tnQ/0.jpg"
+						,"http://behance.vo.llnwd.net/profiles5/102367/projects/479163/01023671270986293.jpg"
+						,"http://a1.ec-images.myspacecdn.com/images02/119/315ba7b731d342d4832ff8f0efba57cc/l.jpg"
+						,"http://cdn.head-fi.org/e/e1/e1a4b8de_plug-macro.jpg"]
+},
+{
+	"store_id":"Coffe"
+	,"password":"1234"
+	,"store_name":"Coffe Bean(목동점)"
+	,"president_name":"커피빈"
+	,"business_number":12341234
+	,"category":"서비스"
+	,"manager_name":"리신"
+	,"manager_phone":"1234-1234"
+	,"address":"서울시 양천구 목동 커피빈"
+	,"description":"이 상점에 대한 설명입니다."
+	,"latitude":37.527579
+	,"longitude":126.875812
+	,"dayoff":"토, 일"
+	,"open_time":"1000"
+	,"close_time":"2200"
+	,"email":"sunken37@gmail.com"
+	,"prime_image":"http://c.ask.nate.com/imgs/qrsi.php/6021248/8212964/1/3/A/%EC%BB%A4%ED%94%BC%EB%B9%88%201.jpg"
+	,"pictures_images":["http://pds8.egloos.com/pds/200802/11/22/b0048222_47af366d19893.jpg"
+						,"http://c.ask.nate.com/imgs/qrsi.php/5843864/7930276/1/20/A/%EC%BB%A4%ED%94%BC%EB%B9%88.jpg"
+						,"http://cfs9.tistory.com/upload_control/download.blog?fhandle=YmxvZzU5Mzk2QGZzOS50aXN0b3J5LmNvbTovYXR0YWNoLzI0LzI0OTMuanBn"
+						,"http://c.ask.nate.com/imgs/qrsi.php/8777166/11623887/0/1/A/2008-12-04%2010;35;59.jpg"]
+},
+{
+	"store_id":"seven"
+	,"password":"1234"
+	,"store_name":"세븐 일레븐(신사점)"
+	,"president_name":"세븐"
+	,"business_number":12341234
+	,"category":"서비스"
+	,"manager_name":"아리"
+	,"manager_phone":"02) 1234-1234"
+	,"address":"서울시 강남구 신사동 세븐일레븐"
+	,"description":"이 상점에 대한 설명입니다."
+	,"latitude":37.519969
+	,"longitude":127.023223
+	,"dayoff":"일"
+	,"open_time":"1000"
+	,"close_time":"2200"
+	,"email":"sunken37@gmail.com"
+	,"prime_image":"http://c.ask.nate.com/imgs/qrsi.php/8851609/11800840/0/1/A/RPR20090112003600353_01.jpg"
+	,"pictures_images":["http://www.ablenews.co.kr/news/newsimages/newsimage/C_[1]14756.jpg"
+						,"http://itviewpoint.com/files/attach/images/129/941/118/seveneleven.jpg"
+						,"http://www.ilbe.com/files/attach/images/377678/947/678/042/7943a49241675239f1926014c814538d.jpg"
+						,"http://cfs7.tistory.com/image/13/tistory/2008/09/29/14/06/48e06246015a1"
+						,"http://cfile30.uf.tistory.com/image/1950C54D4E77E64F233096"]
+},
+{
+	"store_id":"florida"
+	,"password":"1234"
+	,"store_name":"플로리다"
+	,"president_name":"플로리다"
+	,"business_number":12341234
+	,"category":"서비스"
+	,"manager_name":"바람"
+	,"manager_phone":"032) 1234-1234"
+	,"address":"미국시 쌀국 쌀나라 쌀쌀쌀"
+	,"description":"이 상점에 대한 설명입니다."
+	,"latitude":27.664827
+	,"longitude":-81.515754
+	,"dayoff":"일"
+	,"open_time":"1000"
+	,"close_time":"2200"
+	,"email":"sunken37@gmail.com"
+	,"prime_image":"http://www.lifeinus.com/Images/FL/TG-FL001.jpg"
+	,"pictures_images":["http://www.llets.com/city_board/data/florida-cruises.jpg"
+						,"http://www.llets.com/city_board/data/cape_florida.jpg"
+						,"http://postfiles2.naver.net/20120727_1/dptwbgd_1343358587398rr2NO_JPEG/things-to-do-in-florida.jpg?type=w2"
+						,"http://postfiles1.naver.net/20100601_288/realatblog_1275354566518BmnLA_jpg/%EB%AF%B8%EA%B5%AD%EC%97%AC%ED%96%89_%ED%94%8C%EB%A1%9C%EB%A6%AC%EB%8B%A4_%EB%8D%B0%EC%9D%B4%ED%86%A0%EB%84%88%EB%B9%84%EC%B9%98_3_realatblog.jpg?type=w2"
+						,"http://getabout.hanatour.com/info/files/2010/07/IMG_1976-600x400.jpg"]
+},
+{
+	"store_id":"art"
+	,"password":"1234"
+	,"store_name":"예술의 전당"
+	,"president_name":"예슬이"
+	,"business_number":12341234
+	,"category":"서비스"
+	,"manager_name":"소나"
+	,"manager_phone":"02) 1234-1234"
+	,"address":"서울시 서초구 서초3동 예술의 전당"
+	,"description":"이 상점에 대한 설명입니다."
+	,"latitude":37.478625
+	,"longitude":127.011309
+	,"dayoff":"토, 일"
+	,"open_time":"1000"
+	,"close_time":"2200"
+	,"email":"sunken37@gmail.com"
+	,"prime_image":"http://cfile10.uf.tistory.com/image/204157445045C00E0F2903"
+	,"pictures_images":["http://big5chinese.visitkorea.or.kr/cms/resource/88/1257288_image2_1.jpg"
+						,"http://www.avixtech.co.kr/upload_data/project/2003129153232.jpg"
+						,"http://image.asiatoday.co.kr/file/%EC%98%88%EC%88%A0%EC%9D%98%EC%A0%84%EB%8B%B9.jpg"
+						,"http://blog.joinsmsn.com/usr/c/j/cjh59/37/%EB%8C%80%EC%A0%84%20%EB%AC%B8%EC%98%88%EC%A0%84.bmp"
+						,"http://www.jmrjazz.co.kr/files/attach/images/73/216/%EC%98%88%EC%88%A0%EC%9D%98%EC%A0%84%EB%8B%B9%EA%B3%B5%EC%97%B002.jpg"]
+},
+{
+	"store_id":"lake"
+	,"password":"1234"
+	,"store_name":"호수공원(일산점)"
+	,"president_name":"나호수"
+	,"business_number":12341234
+	,"category":"서비스"
+	,"manager_name":"나달리"
+	,"manager_phone":"031) 1234-1234"
+	,"address":"경기도 일산시 일산동구 호수로 595"
+	,"description":"이 상점에 대한 설명입니다."
+	,"latitude":37.663824
+	,"longitude":126.757738
+	,"dayoff":"수"
+	,"open_time":"1000"
+	,"close_time":"2200"
+	,"email":"sunken37@gmail.com"
+	,"prime_image":"http://www.ilbe.com/files/attach/images/377678/751/047/240/24dd075a4fedca9c7138b9379afbd780.jpg"
+	,"pictures_images":["http://cfs12.tistory.com/image/34/tistory/2009/07/13/09/31/4a5a804c5a51e"
+						,"http://blog.joinsmsn.com/usr/a/_/a_ship0123/12/%ED%98%B8%EC%88%98%EA%B3%B5%EC%9B%90%20%EC%84%9D%EC%96%91%EC%9D%8C%EC%95%85%ED%9A%8C8621%20420.jpg"
+						,"http://thumb.photo.naver.net/exphoto01/2009/10/27/47//20_danax9289.jpg"
+						,"http://extmovie.com/zbxe/files/attach/images/1957888/955/958/001/%ED%98%B8%EC%88%98%EA%B3%B5%EC%9B%90_1.jpg"
+						,"http://cphoto.asiae.co.kr/listimglink/6/2009080613163090675_4.jpg"]
+},
+{
+	"store_id":"lotte"
+	,"password":"1234"
+	,"store_name":"롯데월드(잠실점)"
+	,"president_name":"롯데"
+	,"business_number":12341234
+	,"category":"서비스"
+	,"manager_name":"홍상수"
+	,"manager_phone":"1234-1234"
+	,"address":"서울시 강동구 잠실동 롯데월드"
+	,"description":"이 상점에 대한 설명입니다."
+	,"latitude":37.511515
+	,"longitude":127.098266
+	,"dayoff":"월"
+	,"open_time":"1000"
+	,"close_time":"2200"
+	,"email":"sunken37@gmail.com"
+	,"prime_image":"http://www.whbcenter.com/whb_tm/data/tourmall/%EB%A1%AF%EB%8D%B0%EC%9B%94~11.jpg"
+	,"pictures_images":["http://cfs15.tistory.com/image/35/tistory/2009/01/30/02/41/4981ea67a37b2"
+						,"http://cfs14.tistory.com/image/18/tistory/2009/02/01/17/25/49855c5d4f49f"
+						,"http://c.ask.nate.com/imgs/qrsi.php/6007712/8094299/0/1/A/%EB%A1%AF%EB%8D%B0%EC%9B%94%EB%93%9C.jpg"
+						,"http://cafefiles.naver.net/20100808_82/fmn19_1281228713043wC2Nk_jpg/%EC%A0%9C2%EB%A1%AF%EB%8D%B0%EC%9B%94%EB%93%9C_fmn19.jpg"
+						,"http://cfs13.tistory.com/image/24/tistory/2009/01/08/00/17/4964c77c94430"]
+},
+{
+	"store_id":"lake2"
+	,"password":"1234"
+	,"store_name":"석촌호수(잠실점)"
+	,"president_name":"DEPLUG"
+	,"business_number":12341234
+	,"category":"서비스"
+	,"manager_name":"네스"
+	,"manager_phone":"1234-1234"
+	,"address":"서울시 강동구 석촌동 석촌호수"
+	,"description":"이 상점에 대한 설명입니다."
+	,"latitude":37.507961
+	,"longitude":127.100681
+	,"dayoff":"토, 일"
+	,"open_time":"1000"
+	,"close_time":"2200"
+	,"email":"sunken37@gmail.com"
+	,"prime_image":"http://cfile25.uf.tistory.com/image/13049C524DA3E8BD2281B7"
+	,"pictures_images":["http://cfs4.tistory.com/upload_control/download.blog?fhandle=YmxvZzIwODkzQGZzNC50aXN0b3J5LmNvbTovYXR0YWNoLzAvMTYwMDAwMDAwMDAwLmpwZw%3D%3D"
+						,"http://cfile1.uf.tistory.com/image/200DC2524DA3E8B110E295"
+						,"http://www.poemlane.com/image-10/sukchon80.jpg"
+						,"http://cfile24.uf.tistory.com/image/115E94344F93E8D10BB75A"
+						,"http://stg.olpost.com/post/view.html?uid=20527401&size=573x0"]
+},
+{
+	"store_id":"forest"
+	,"password":"1234"
+	,"store_name":"불서울꿈의숲"
+	,"president_name":"엘프"
+	,"business_number":12341234
+	,"category":"서비스"
+	,"manager_name":"꽃사슴"
+	,"manager_phone":"1234-1234"
+	,"address":"서울시 강북구 나는야 사나이"
+	,"description":"이 상점에 대한 설명입니다."
+	,"latitude":37.620946
+	,"longitude":127.041101
+	,"dayoff":"토, 일"
+	,"open_time":"1000"
+	,"close_time":"2200"
+	,"email":"sunken37@gmail.com"
+	,"prime_image":"http://cfs13.tistory.com/image/31/tistory/2008/10/17/14/49/48f8274d06c4b"
+	,"pictures_images":["http://postfiles11.naver.net/20120430_154/ilovemisslee_1335750629439jvGKN_JPEG/IMG_0006.jpg?type=w2"
+						,"http://blog.joinsmsn.com/usr/k/ks/kkssmm4321/1001/4b430cacc185d.jpg"
+						,"http://photovil.hani.co.kr/files/attach/images/83/909/117/%EB%B6%81%EC%84%9C%EC%9A%B8%20%EA%BF%88%EC%9D%98%20%EC%88%B2_1.JPG"
+						,"http://pds16.egloos.com/pds/200911/13/02/b0056802_4afceffa59814.jpg"
+						,"http://thumb.photo.naver.net/exphoto02/2009/10/29/137//imgp6197_bbori73.jpg"]
+},
+{
+	"store_id":"lol"
+	,"password":"1234"
+	,"store_name":"league of legends"
+	,"president_name":"데마시아"
+	,"business_number":12341234
+	,"category":"서비스"
+	,"manager_name":"데마시아"
+	,"manager_phone":"001) 1234-1234"
+	,"address":"미국시 쌀국 쌀나라 쌀판다 쌀쌀"
+	,"description":"이 상점에 대한 설명입니다."
+	,"latitude":40.066402
+	,"longitude":-118.565163
+	,"dayoff":"토, 일"
+	,"open_time":"1000"
+	,"close_time":"2200"
+	,"email":"sunken37@gmail.com"
+	,"prime_image":"http://t2.gstatic.com/images?q=tbn:ANd9GcQt0hipyFCDnz9r93pgXuPTYjECpi4MYRFsghqqpEacn_WU2tcFwmD8LE6oUA"
+	,"pictures_images":["http://blogs-images.forbes.com/erikkain/files/2012/06/league-of-legends-front-mmomac.png"
+						,"http://pcmedia.gamespy.com/pc/image/article/101/1014104/league-of-legends-20090814090648906.jpg"
+						,"http://breakbrunch.com/wp-content/uploads/2012/05/what-happened-in-most-lol-game.jpg"
+						,"http://download.gamezone.com/uploads/image/data/1111460/Zyra_League_of_Legends.JPG"
+						,"http://www.blogcdn.com/massively.joystiq.com/media/2012/10/lol-pandateemo.jpg"]
+},
+{
+	"store_id":"madang"
+	,"password":"1234"
+	,"store_name":"상상마당(홍대점)"
+	,"president_name":"김덕구"
+	,"business_number":12341234
+	,"category":"서비스"
+	,"manager_name":"김덕구"
+	,"manager_phone":"1234-1234"
+	,"address":"서울시 마포구 서교동 홍대입구"
+	,"description":"이 상점에 대한 설명입니다."
+	,"latitude":37.550911
+	,"longitude":126.921110
+	,"dayoff":"월"
+	,"open_time":"1000"
+	,"close_time":"2200"
+	,"email":"sunken37@gmail.com"
+	,"prime_image":"http://cfile9.uf.tistory.com/image/1529F8184CB44EF950D789"
+	,"pictures_images":["http://www.sangsangmadang.com/XFileUploadData5/Temp/236638979208957.jpg"
+						,"http://imgjungle.jungle.co.kr/magazine/up_img/main/a05(0).jpg"
+						,"http://menu.mt.co.kr/moneyweek/thumb/2010/03/11/06/2010031123098050450_05.jpg"
+						,"http://korean.visitkorea.or.kr/cms/resource/12/668412_image2_1.jpg"
+						,"http://cfs12.tistory.com/image/10/tistory/2008/12/14/21/00/4944f56ab84c9"]
+}
+]

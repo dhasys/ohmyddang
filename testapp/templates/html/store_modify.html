@@ -1,0 +1,214 @@
+{% include "header.html" %}
+ <body>
+{% include "top.html" %}
+<!-- body  -->
+<div id="wrap">
+  <div id="left">
+    <ul class="sel">가맹점관리</ul>
+	<ul><a href="#">공지사항</a></ul>
+	<ul><a href="#">알림</a></ul>
+	<ul><a href="#">고객센터</a></ul>
+	<ul><a href="#">일반회원관리</a></ul>
+	<ul><a href="#">결제정보</a></ul>
+	<ul><a href="#">포인트관리</a></ul>
+    <ul><a href="#">전체통계</a></ul>
+	<ul><a href="#">가맹점별통계</a></ul>
+  </div>
+  <!-- 현재영역까지 GNB -->
+
+  <!-- 본문 -->
+<form id="register_form" action="/store/modify/save/" method="post" autocomplete="off">
+{% csrf_token %}
+  <input type="hidden" name="store_mode" value="modify" />
+  <input type="hidden" name="store_id" value="{{ store.id }}"/>
+  <div id="contents">
+    <h1>가맹점 정보수정</h1>
+    <table class="tbl">
+      <colgroup>
+        <col width="173px" />
+        <col width="*">
+      </colgroup>
+      <tr>
+        <th class="first th_border2 Lft"><strong class="point">가맹점 명</strong></th>
+        <td class="Lft">
+          <label>
+            <input type="text" class="text w150" value="{{ store.store_name }}" readonly />
+          </label>
+        </td> 
+      </tr>
+      <tr>
+        <th class="first th_border2 Lft"><strong class="point">대표자 명</strong></th>
+        <td class="Lft">
+          <label>
+            <input type="text" class="text w150"  value="{{ store.president_name }}" readonly/>
+          </label>
+        </td> 
+      </tr>
+      <tr>
+        <th class="first th_border2 Lft"><strong class="point">사업자등록번호</strong></th>
+        <td class="Lft">
+          <label>
+            <input type="text" class="text w150"  value="{{ store.business_number }}" readonly/>
+			<!-- <input type="button" class="btn_gray_h22 w50" value="인증" /> -->
+          </label>
+        </td> 
+      </tr>
+      <tr>
+        <th class="first th_border2 Lft"><strong class="point">아이디</strong></th>
+        <td class="Lft">
+          <label>
+            <input type="text" class="text w150" value="{{ store.id }}" readonly/>
+          </label>
+        </td> 
+      </tr>
+      <tr>
+        <th class="first th_border2 Lft"><strong class="point">비밀번호</strong></th>
+        <td class="Lft">
+          <label>
+            <input type="password" name="password" class="text w150" value="{{ store.password }}" />
+          </label>
+        </td> 
+      </tr>
+	  <tr>
+        <th class="first th_border2 Lft"><strong class="point">비밀번호 확인</strong></th>
+        <td class="Lft">
+          <label>
+            <input type="password" name="password_validation" class="text w150" value="{{ store.password }}" />
+          </label>
+        </td> 
+      </tr>
+      <tr>
+        <th class="first th_border2 Lft"><strong class="point">업태/업종</strong></th>
+        <td class="Lft">
+   <!--        <label>
+            <input type="text" name="category" class="text w150" value="{{ category }}" />
+          </label> -->
+          <select name="category" class="text w3">
+              <option value="서비스"> 서비스 </option>
+              <option value="오락/문화"> 오락/문화 </option>
+              <option value="기타"> 기타 </option>
+            </select>
+        </td> 
+      </tr>
+      <tr>
+        <th class="first th_border2 Lft"><strong class="point">영업시간</strong></th>
+        <td class="Lft">
+          <label>
+            <select name="open_hour" class="text w3">
+               {% for item in hours %}<option value="{{item}}">{{ item }}시</option>{% endfor %}
+            </select>
+            <select name="open_minute" class="text w3">
+               {% for item in minutes %}<option value="{{item}}">{{ item }}분</option>{% endfor %}
+            </select>&nbsp;~&nbsp;
+            <select name="close_hour" class="text w3">
+                {% for item in hours %}<option value="{{item}}">{{ item }}시</option>{% endfor %}
+            </select>
+            <select name="close_minute" class="text w3">
+                {% for item in minutes %}<option value="{{item}}">{{ item }}분</option>{% endfor %}
+            </select>
+          </label>
+        </td> 
+      </tr>
+      <tr>
+        <th class="first th_border2 Lft"><strong class="point">휴무일</strong></th>
+        <td class="Lft">
+          <label>
+            <select name="dayoff" class="text w3">
+              <option value="1"> 토요일 </option>
+              <option value="2"> 일요일 </option>
+              <option value="3"> 공휴일, 주말 </option>
+            <!-- <input type="text" class="text w150" value="{{ dayoff }}"/> 예) 공휴일, 주말, 월 -->
+            </select >
+          </label>
+        </td> 
+      </tr>
+      <tr>
+        <th class="first th_border2 Lft"><strong class="point">담당자</strong></th>
+        <td class="Lft">
+          <label>
+            <input type="text" name="manager_name" class="text w150" value="{{ store.manager_name }}"/>
+          </label>
+        </td> 
+      </tr>
+      <tr>
+        <th class="first th_border2 Lft"><strong class="point">담당자 연락처</strong></th>
+        <td class="Lft">
+          <label>
+            <input type="text" name="manager_phone" class="text w150" value="{{ store.manager_phone }}" />
+          </label>
+        </td> 
+      </tr>
+	  <tr>
+        <th class="first th_border2 Lft"><strong class="point">주소</strong></th>
+        <td class="Lft vertical_t">
+          <label>
+            <div>
+				<input type="text" name="address" class="text w300" value="{{ store.address }}" />
+				<!-- <input type="button" class="btn_gray_h22 w90" value="우편번호 검색" /> -->
+			     </div>
+			<!-- <div> -->
+				<!-- <input type="text" class="text w300" value="534-22 상원빌딩 2층"/> -->
+			<!-- </div> -->
+          </label>
+        </td> 
+      </tr>
+	  <tr>
+        <th class="first th_border2 Lft"><strong>보유포인트</strong></th>
+        <td class="Lft">
+          <label>
+            <input type="text" class="text w150" value="100000000p" readonly />
+          </label>
+        </td> 
+      </tr>
+	  <tr>
+        <th class="first th_border2 Lft"><strong>가맹점소개글</strong></th>
+        <td class="Lft">
+          <label>
+            <textarea rows="5" name="description" class="text w500" > {{ store.description }} </textarea>
+          </label>
+        </td> 
+      </tr>
+	  <tr>
+        <th class="first th_border2 Lft"><strong class="point">사진등록</strong></th>
+        <td class="Lft vertical_t">          
+		  <div>
+		  <!---업로드된 사진 리스트--->
+            <div class="ms_photo">
+				<img src="http://i2.media.daumcdn.net/photo-media/201209/12/sportsdonga/20120912140603934.jpg">
+				<a href="#"><img src="/static/img/del_photo.png" class="del_photo"></a>
+			</div>
+			<div class="ms_photo">
+				<img src="http://i2.media.daumcdn.net/photo-media/201209/12/sportsdonga/20120912140603934.jpg">
+				<a href="#"><img src="/static/img/del_photo.png" class="del_photo"></a>
+			</div>
+			<div class="ms_photo">
+				<img src="http://i2.media.daumcdn.net/photo-media/201209/12/sportsdonga/20120912140603934.jpg">
+				<a href="#"><img src="/static/img/del_photo.png" class="del_photo"></a>
+			</div>
+          </div>
+		  <div>
+            <input type="text" class="text w300" />
+			<input type="button" class="btn_gray_h22 w70" value="파일찾기" />
+			<input type="button" class="btn_orange_h22 w50" value="업로드" />
+          </div>
+        </td> 
+      </tr>
+      
+      
+    </table>
+  <!-- //본문 -->
+  <!-- 버튼, 페이저 -->
+    <div class="bnarea">
+	  <div class="floatRight">
+        <input type="submit" class="btn_gray_h28 w90" value="저장" />
+        <input type="button" class="btn_gray_h28 w90" value="취소" onclick="location.href='/store/list'"/>
+      </div>
+    </div>    
+  </div>
+</div>
+</form>
+<!-- footer -->
+{% include "footer.html" %}
+</body>
+</html>
+

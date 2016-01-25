@@ -1,0 +1,136 @@
+{% include "header.html" %}
+<body>
+<script>
+function getPGIOresult() {
+  var background = $("#PGIBackGround");
+  var replycode = document.PGIOForm.elements['replycode'].value;
+  var replyMsg = document.PGIOForm.elements['replyMsg'].value;
+
+  $("#tid").val(getPGIOElement('tid'));
+  $('#hashresult').val(getPGIOElement('hashresult'))
+
+  if(replycode==0000){ 
+    $('#point_payment_form').submit();
+   }else{
+    if(replycode == 9805){
+      alert('결제를 취소하셨습니다.');
+    }else{
+      alert('결제를 실패했습니다.');
+    }
+    location.href = "/point/list";
+   }
+
+}
+
+function payment() {
+  var background = $("#PGIBackGround");
+  var payscreen = $("#PGIOscreen");
+
+  background.css({'width':100+'%', 'height':100+'%', 'background-color':'rgba(0,0,0,0.5)'});
+  payscreen.css({'width':400, 'margin':30+'%'});
+
+  background.show();
+  doTransaction(document.PGIOForm);
+}
+
+function goPayment(type){
+  $("#paymethod").val(type);
+  payment();
+}
+
+function changePayment(type){
+  $("#paymethod").val(type);
+}
+
+function changePointType(bill_id, type, price){
+  $("#goodname").val(type);
+  $("#unitprice").val(price);  
+  $("#bill_id").val(bill_id);
+}
+
+</script>
+{% include "top.html" %} 
+{% include "left.html" %}
+
+<div id="PGIBackGround" style="display:none;position:absolute;z-index:9000;background-color:#FFFFFF;left:0;top:0;" >
+  <div id="PGIOscreen" style="position:absolute;z-index:9999;width:200px;height:300px;background-color:#FFFFFF;" >
+    <input type="hidden" value="OpenPay API" onclick="javascript:doTransaction(document.PGIOForm);" >
+  </div>
+</div>
+  <div id="contents">
+    <h1>포인트구매</h1>
+    <table class="tbl mb30">
+      <colgroup>
+        <col width="135px" />
+		    <col width="160px" />
+		    <col width="*" />
+      </colgroup>
+
+      <tr>
+        <th class="first Lft vertical_t2"><strong>보유포인트</strong></td>
+        <td colspan="2" class="Lft">{{ sum_point }} </td>
+      </tr>
+      <tr><th rowspan="100" class="first Lft vertical_t2"><strong>결제금액선택</strong></td></tr>    
+      {% for b in bills %}
+      <tr>
+        <td class="Lft">
+          <input type="radio" name="point_select" value="{{b.id}}" {%if forloop.counter == 1 %}checked {%endif %} onclick="changePointType({{b.id}} ,'funing{% if b.bill_type == 1 %}포인트상품{%else%}정액제상품{%endif%}', {{b.price}} );" />
+          <span class="orange"><b>  {{b.point}} {% if b.bill_type == 1 %} p {%else%} 일간 무제한{%endif%}</b></span>
+        </td>
+        <td class="Lft">결제금액 : {{b.price}} 원</td>
+      </tr>
+      {% endfor %}
+
+    </table>
+    <br><br><br>
+    <table class="tbl mb30">
+      <colgroup>
+        <col width="160px" />
+        <col width="*" />
+      </colgroup>      
+      <tr>
+        <th rowspan="100" class="first Lft vertical_t2"><strong>결제방식선택</strong></td>
+        <td class="Lft"><input type="radio" name="paytype" onclick="changePayment('card');" value="credit" checked />&nbsp;신용카드&nbsp;(현대, 국민, 하나 SK 카드 는 인터넷 익스플로러에서만 가능합니다.)&nbsp;&nbsp;</td>
+      </tr>      
+      <tr><td class="Lft"><input type="radio" name="paytype" value="phone" onclick="changePayment('801');" />&nbsp;휴대폰 &nbsp;(SKT, KTF 만 가능합니다. LGT는 준비중에 있습니다.)&nbsp;&nbsp;&nbsp;</td></tr>
+      <tr><td class="Lft"><input type="radio" name="paytype" value="account" onclick="changePayment('4');" />&nbsp;실시간 계좌이체 &nbsp;(인터넷 익스플로러에서만 가능힙니다.)&nbsp;&nbsp;&nbsp;</td></tr>
+    </table>    
+    <br><br><br>
+    <div></div>
+    <div><table width="100%"><tr><td align="center"><input type="button" class="btn_gray_h28 w150" value="결제하기" name="credit" onclick="payment();" /></td></tr></table></div>
+  </div>
+</div>
+
+<form name="PGIOForm" id="point_payment_form" action="/point/payment/verify/" method="post">
+  {% csrf_token %}
+  <input type="hidden" name="mb_serial_no" value="funing" />
+  <input type="hidden" name="mid" value="nayadmgh" />
+  <input id="paymethod" type="hidden" name="paymethod" value="card" />
+  <input id="goodcurrency" type="hidden" name="goodcurrency" value="WON" />
+  <input id="langcode" type="hidden" name="langcode" value="KR" />
+  <input id="goodname" type="hidden" name="goodname" value="{{bill_first_contents}}" />
+  <input id="unitprice" type="hidden" name="unitprice" value="{{bill_first_price}}" />
+  <input type="hidden" name="cardquota" value="" />
+  <input type="hidden" name="cardexpiremonth" />
+  <input type="hidden" name="cardexpireyear" />
+  <input type="hidden" name="cardsecretnumber" />
+  <input type="hidden" name="cardownernumber" />
+  <input type="hidden" name="cardtype" />
+  <input type="hidden" name="cardnumber" />
+  <input type="hidden" name="cardauthcode" />
+  <input type="hidden" name="socialnumber" value="" />
+  <input type="hidden" name="carrier" value="" />
+  <input type="hidden" name="receipttotel" value="" />
+  <input type="hidden" name="socialnumber" value="" />  
+  <input id="receipttoemail" type="hidden" name="receipttoemail" value="{{request.user.email}}" />
+  <input id="receipttoname" type="hidden" name="receipttoname" value="{{president_name}}" />
+  <input type="hidden" id="bill_id" name="bill_id" value="{{bills.0.id}}" />
+  <input type="hidden" name="replycode" value="" />
+  <input type="hidden" name="replyMsg" value="" />  
+  <input type="hidden" id="tid" name="tid" value="" />  
+  <input type="hidden" id="hashresult" name="hashresult" value="" />  
+</form>
+{% include "footer.html" %} 
+</body>
+</html>
+

@@ -1,0 +1,40 @@
+{% include "header.html" %}
+<body>
+{% include "top.html" %}
+{% include "left.html" %}
+<form id="review_register_form" action="/review/register/save/" method="post" autocomplete="off">
+{% csrf_token %}
+<input type="hidden" id="r_id" name="r_id" value="{{ review.id }}" />
+  <div id="contents">
+    <h1>리뷰관리 작성</h1>
+    <table class="tbl">
+      <colgroup>
+        <col width="173px" />
+        <col width="*">
+      </colgroup>
+      <tr>
+        <th class="first th_border2 Lft"><strong>작성자명</strong></th>
+        <td class="Lft">
+          <input type="text" class="text w150" id="review_member_name" name="member_name" {%if review.id > 0 %}value="{{review.name}}"{%endif%} />
+        </td> 
+      </tr>
+      <tr>
+        <th class="first th_border2 Lft"><strong>내용입력</strong></th>
+        <td class="Lft">
+          <textarea type="text" rows="3" class="text w500" id="review_contents" name="contents"/>{% if review.id > 0 %}{{ review.contents }}{% endif  %}</textarea><br>
+        </td> 
+      </tr>      
+    </table>
+    <div class="bnarea">
+      <div class="floatRight">
+		    <input type="submit" class="btn_orange_h28 w90" {% if review.id > 0 %} value="수정완료" {% else %} value="저장" {% endif %} />
+        <input type="button" class="btn_gray_h28 w50" value="취소" onclick="location.href='/review/list'" />
+      </div>
+    </div>    
+  </div>
+</div>
+</form>
+{% include "footer.html" %}
+</body>
+</html>
+

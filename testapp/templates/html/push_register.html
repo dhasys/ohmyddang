@@ -1,0 +1,67 @@
+{% include "header.html" %} 
+<script>
+	var __g_form_push_date_arr = ['start_y', 'start_m', 'start_d', 'start_h', 'start_minute'];
+	function toggle(value){
+		if(value==0){
+			$("#setDateTime").hide();
+		}else if(value==1){
+			$("#setDateTime").show();
+		}
+	}
+
+</script>
+<body>
+{% include "top.html" %} 
+{% include "left.html" %} 
+<form id="push_register_form" action="/push/register/save/" method="post" autocomplete="off">
+{% csrf_token %}
+<input type="hidden" id="p_id" name="p_id" value="{{ push.id }}" />
+  <div id="contents">
+    <h1>알림등록</h1>
+    <table class="tbl">
+      <colgroup>
+        <col width="135px" />
+        <col width="*" />
+      </colgroup>
+      <tr>
+        <th class="first Lft vertical_t2"><strong>내용입력</strong></td>
+        <td class="Lft">        	        	
+			<textarea rows="2" class="text w500" id="push_contents" name="contents">{% if push.id > 0 %}{{ push.contents}}{% endif %}</textarea>
+			<div>
+				&nbsp;
+				<input type="radio" name="time_type" id="time_type0" onclick="toggle(0);" value="0" checked>
+				즉시발송&nbsp;&nbsp;
+				<input type="radio" name="time_type" id="time_type1" onclick="toggle(1);" value="1">
+				예약발송
+			</div>
+			<div id="setDateTime" style="display:none;">
+				<select id="start_y" name="start_y" class="text" >
+					{% for item in years %}<option name="start_y" value="{{item}}" {%if today|date:"Y" = item%}selected{%endif%} >{{ item }}년</option>{% endfor %}
+				</select>
+				<select id="start_m" name="start_m" class="text" >
+					{% for item in months %}<option name="start_m" value="{{item}}" {%if today|date:"m" = item%}selected{%endif%} >{{ item }}월</option>{% endfor %}
+				</select>
+				<select id="start_d" name="start_d" class="text" >
+					{% for item in days %}<option name="start_d" value="{{item}}" {%if today|date:"d" = item%}selected{%endif%}>{{ item }}일</option>{% endfor %}
+				</select>
+				&nbsp;&nbsp;
+				<select id="start_h" name="start_h" class="text w3" >
+	           		{% for item in hours %}<option name="start_h" value="{{item}}" {%if today|date:"H" = item%}selected{%endif%}>{{ item }}시</option>{% endfor %}
+        		</select>
+				<select id="start_minute" name="start_minute" class="text w3" >
+	           		{% for item in minutes %}<option name="start_minute" value="{{item}}" {%if today|date:"i" = item%}selected{%endif%}>{{ item }}분</option>{% endfor %}
+        		</select>
+			</div>
+		</td>
+      </tr>
+    </table>
+	<div class="bnarea">
+		<div class="floatRight"><input type="submit" class="btn_orange_h28 w90" value="알림등록" /></div>		
+	</div>
+  </div>
+</div>
+</form>
+{% include "footer.html" %}
+</body>
+</html>
+

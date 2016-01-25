@@ -1,0 +1,233 @@
+{% include "header.html" %}
+  <script type="text/javascript">
+  var __g_delete_picture_cnt = 0;
+ 
+  function delete_prime_image(){
+    if(confirm('삭제하시겠습니까?')){
+      $("#prime_image").remove();
+      $("#prime_image_input").removeAttr('disabled').show();
+      $("#delete_pi").val(1);
+    }
+  }
+
+  function delete_pictures(val){
+    if(confirm('삭제하시겠습니까?')){
+      $("#store_picture_" + val).remove();
+      __g_delete_picture_cnt++;
+      $("#store_picture_" + __g_delete_picture_cnt + "_input").removeAttr('disabled').css('visibility', 'visible');
+      var t = $("#del_pic");
+      t.val(t.val() + ',' + val);
+    }
+  }
+
+  function validate_member(){
+    var result = true;
+    var member_id = $('#member_register_form input:text[name=member_id]').val();
+    var member_nickname = $('#member_register_form input:text[name=member_nickname]').val();
+    $.ajax({
+      type: 'GET',
+      url: '/api/c/member/register?member_id=' + member_id + '&member_nickname=' + member_nickname + '&isResponse=true',
+      dataType: 'text',
+      success: function(data){
+        if(data=='id'){
+          alert('중복된 id 입니다. 다시입력해주세요');
+          result = false;
+        }else if(data=='nick'){
+          alert('중복된 닉네임 입니다. 다시입력해주세요');
+          result = false;
+        }
+      },
+      async: false
+    });
+    return result;
+  }
+  
+	
+	function discountToggle(value){
+		if(value==0){
+			$('#discount_types1').show();
+			//$('#discount_types2').hide();
+		}else if(value==1){
+			//$('#discount_types2').show();
+			$('#discount_types1').hide();
+		}
+	}
+	
+
+ 
+};
+
+</script> 
+<body>
+{% include "top.html" %}
+<form id="register_form" action="/store/register/save" method="post" autocomplete="off" enctype="multipart/form-data">
+{% csrf_token %}
+<input type="hidden" id="s_id" name="s_id" value= "{{store.id}}" />
+<input type="hidden" name="lat" value="" id="lat" />
+<input type="hidden" name="lng" value="" id="lng" />
+<input type="hidden" id="delete_pi" name="delete_pi" value="" />
+<input type="hidden" id="del_pic" name="del_pic" value="" />
+<div id="wrap" class="bg_none">
+
+  <div id="contents" class="join_margin">
+    		
+     <th class="first th_border2 Lft"><strong class="point">할인방식선택</strong></th>
+      	<td class="Lft">
+      	<div>
+			&nbsp;
+			<input type="radio" id="discount_radio0" name="discount_type" value="0" onclick="discountToggle(0);" {% if c_id == 0 %} checked {% endif %}/>
+			가격기준&nbsp;&nbsp;
+			<input type="radio" id="discount_radio1" name="discount_type" value="1" onclick="discountToggle(1);" />
+			할인율기준&nbsp;&nbsp;
+		</div>
+	</th>
+
+ 	{% if store.id > 0 %}<h1 class="join">가맹점 정보수정</h1>{% else %}<h1 class="join">가맹점 신규가입</h1>{% endif %}
+  	    
+	<table class="tbl border_t_none">
+      <colgroup>
+      <col width="173px" />
+        <col width="*">
+      </colgroup>
+      
+      <tr>
+        <th class="first th_border2 Lft"><strong class="point">아이디</strong></th>
+        <td class="Lft">
+          {% if store.id > 0 %}{{ store.user.username }}
+          {% else %}<label><input type="text" id="store_id" name="store_id" class="text w150" maxlength="10"/>&nbsp;10자까지 입력가능 (영어 또는 영어+숫자 입력가능)</label>{% endif %}
+        </td> 
+      </tr>
+      
+      <tr>
+        <th class="first th_border2 Lft"><strong class="point">담당자 연락처</strong></th>
+        <td class="Lft"><input type="text" id="manager_phone" name="manager_phone" class="text w150" maxlength="13" {% if store.id > 0 %}value="{{ store.manager_phone }}"{%endif%}/></td> 
+      </tr>
+      
+      <tr>
+        <th class="first th_border2 Lft"><strong class="point">이름</strong></th>
+        <td class="Lft"><input type="text" id="manager_name" name="manager_name" class="text w150" {% if store.id > 0 %}value="{{ store.manager_name }}"{%endif%} maxlength="14"/></td> 
+      </tr>
+      
+      <tr>
+        <th class="first th_border2 Lft"><strong class="point">이메일</strong></th>
+        <td class="Lft">
+            {% if store.id > 0 %}
+            <input type="text" id="email" name="email" class="text w150" value="{{ store.user.email }}"/>&nbsp;
+            {% else %}<input type="text" name="email" class="text w150" value=""/>&nbsp;비밀번호 분실 시 또는 공지 및 이용안내를 위한 용도입니다.
+            {% endif %}
+        </td> 
+      </tr>
+      
+      <tr>
+        <th class="first th_border2 Lft"><strong class="point">비밀번호</strong></th>
+        <td class="Lft"><input type="password" id="password" name="password" class="text w150" /> &nbsp; 4자리 이상 입력해주세요.</td> 
+      </tr>
+      <tr>
+        <th class="first th_border2 Lft"><strong class="point">비밀번호 확인</strong></th>
+        <td class="Lft"><input type="password" id="password_validation" name="password_validation"class="text w150" /></td>
+      </tr>
+      
+      
+      <tr>
+        <th class="first th_border2 Lft"><strong class="point ">회사명</strong></th>
+        <td class="Lft"><input type="text" id="store_name" name="store_name" class="text w150" value="{{ store.store_name }}"/></td> 
+      </tr>
+      
+      <tr>
+        <th class="first th_border2 Lft"><strong class="point">대표자 명</strong></th>
+        <td class="Lft">
+            {% if store.id > 0 %}{{ store.president_name}}
+            {% else %}<input type="text" id="president_name" name="president_name" class="text w150" />
+            {% endif %}
+        </td> 
+      </tr>
+      
+      <div id="discount_types1" style="display:none;">
+	      <tr>
+	        <th class="first th_border2 Lft"><strong class="point">사업자등록번호</strong></th>
+	        <td class="Lft">
+	          {% if store.id > 0 %}
+	            {{ store.business_number|slice:":3"}}-{{store.business_number|slice:"3:5"}}-{{store.business_number|slice:"5:"}} 
+	          {% else %}
+	            <input type="text" id="business_number" name="business_number" class="text w150" maxlength="10" />
+	            <input type="button" id="certification" name="certification" class="btn_gray_h22 w50" value="인증" />
+	          {% endif %}
+	        </td> 
+	      </tr>
+	  </div>
+      
+      
+      <tr>
+        <th class="first th_border2 Lft"><strong>가맹점소개글</strong></th>
+        <td class="Lft"><textarea rows="5" class="text w500" id="description" name="description">{% if store.id > 0 %}{{ store.description}}{%endif%}</textarea></td> 
+      </tr>
+      <tr>
+        <th class="first th_border2 Lft"><strong >대표사진등록</strong></th>
+        <td class="Lft vertical_t">    
+        지도에 표시될 이미지입니다. 정사각형 이미지를 권장합니다.
+          <div id="div0">
+            {% if store.prime_image %}
+            <div class="ms_photo" id="prime_image"><img src="{{ store.prime_image.original_image.url }}"><a onclick="delete_prime_image()"><img src="/static/img/del_photo.png" class="del_photo"></a></div>
+            {% endif %}
+            <input type="file" name="prime_image" value="파일찾기" id="prime_image_input" {% if store.prime_image %}style="display:none;" disabled{%endif%} /><br>
+          </div>
+        </td> 
+      </tr>      
+      <tr>
+        <th class="first th_border2 Lft"><strong >소개사진등록</strong></th>
+        <td class="Lft vertical_t">  
+        사진 등록은 10장까지 가능합니다. (사진 용량 : 개당 2Mb 이내)
+    		  <div id="register_pictures"><div class="ms_photo_box;">
+            {% for pic in pictures %}
+            {% if pic %}
+            <div class="ms_photo" id="store_picture_{{forloop.counter}}"><img src="{{ pic.original_image.url }}" ><a onclick="delete_pictures({{forloop.counter}})" style="cursor:pointer;"><img src="/static/img/del_photo.png" class="del_photo"></a></div>
+            {% endif %}
+            {% endfor %}
+            {% for pic in pictures %}
+              </div><input type="file" name="store_picture_{{forloop.counter}}" id="store_picture_{{forloop.counter}}_input" value="파일찾기" {% if pic %}style="visibility:hidden;" disabled{%endif%} /><br />
+            {% endfor %}
+          </div>
+        </td> 
+      </tr>
+      {% if store.id < 1 %}<tr>
+        <th class="first th_border2 Lft"><strong>가맹점 이용약관</strong></th>
+        <td class="Lft"><textarea readonly rows="10" class="text w500" style="overflow-x:hidden">전자상거래(인터넷사이버몰) 표준약관
+
+
+      </textarea>
+      <br>
+      <input type="checkbox" name="chk_validate" value="이용약관 확인" /> 이용약관에 동의합니다.
+    </td> 
+      </tr>{% endif %}
+
+      {% if store.id < 1 %}
+        <tr>
+          <th class="first th_border2 Lft"><strong>개인정보수집 안내</strong></th>
+          <td class="Lft"><textarea readonly rows="10" class="text w500" style="overflow-x:hidden">
+
+
+            </textarea>
+            <br>
+            <input type="checkbox" name="chk_personal_info" value="개인정보 취급동의" /> 개인정보 수집 및 이용에 동의합니다.
+          </td> 
+        </tr>
+        {% endif %}          
+      
+    </table>
+    <div class="bnarea">
+      <div class="floatRight">
+        {% if store.id > 0 %}
+        <input type="submit" class="btn_gray_h28 w90" value="수정완료" />
+        <input type="button" class="btn_gray_h28 w90" value="취소" onclick="location.href='/store/detail/{{ store.id}}'"/>
+        {% else %}
+        <input type="submit" class="btn_gray_h28 w90" value="가입" />
+        <input type="button" class="btn_gray_h28 w90" value="취소" onclick="location.href='/'"/>
+        {% endif %}
+      </div>
+    </div>    
+  </div>
+</div>
+</form>
+{% include "footer.html" %}
+</body>
+</html>

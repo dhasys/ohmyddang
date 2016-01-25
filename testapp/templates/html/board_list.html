@@ -1,0 +1,53 @@
+{% include "header.html" %}
+<body>
+{% include "top.html" %}
+{% include "left.html" %}
+  <div id="contents">
+    <h1>고객센터</h1>
+    <table class="tbl">
+      <colgroup>
+        <col width="*" />
+		    <col width="150px" />
+		    <col width="60px" />
+      </colgroup>
+      <tr>
+        <th class="first">제목</th>
+		    <th>등록일</th>
+		    <th>답변여부</th>
+      </tr>
+      {% for item in documents %}
+      <tr>
+        <td class="first Lft"><a href="/board/detail/{{ item.id }}">{{ item.title }}</a></td>
+		    <td>{{ item.regdate|date:"Y.n.d A h:i" }}</td>
+		    <td>{% if item.reply_flag == 0 %}대기{% else %}완료{% endif %}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  <!-- //본문 -->
+  <!-- 버튼, 페이저 -->
+	<div class="bnarea">
+    {% if request.user.is_staff == 0 %}
+    <div class="floatRight">
+      <input type="button" class="btn_orange_h28 w90" id="board_list_register"value="글쓰기" onclick="location.href='/board/register'" />
+    </div>
+    {% endif %}
+		<div class="paging">
+			<span class="btn"><a href="/board/list/page/{{ start_page }}"><img src="/static/img/page_left.png" />&nbsp;첫페이지</a></span>
+      {% for item in paging_list %}
+        {% if current_page = item %}
+        <span><strong>{{ item }}</strong></span>
+        {% else %}
+        <span><a href="/board/list/page/{{ item }}">{{ item }}</a></span>
+        {% endif %}
+      {% endfor %}
+			<span class="btn"><a href="/board/list/page/{{ end_page }}">끝페이지&nbsp;<img src="/static/img/page_right.png" /></a></span>
+		</div>
+	</div>
+  </div>
+</div>
+<form method=post>
+</form>
+{% include "footer.html" %}
+</body>
+</html>
+

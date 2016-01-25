@@ -1,0 +1,137 @@
+{% spaceless %}
+{% include "header.html" %} 
+
+<body> 
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      
+      function drawChart() {
+
+        var options = {
+          legend : {position: 'top', textStyle: {color: 'gray', fontSize: 11}}
+        };
+
+        {% if tab.months == 'on' %}
+          {{prefix_gender_arr|length}}
+          var coupon_down_gender_data = google.visualization.arrayToDataTable( [[ {%for item in prefix_gender_arr %}{{item|safe}}{% if forloop.counter != 5 %},{%endif %}{%endfor%}], {%for item in coupon_down_gender_arr %}{{item|safe}} {% if forloop.counter != 12 %},{%endif %} {%endfor%} ] );
+          var coupon_use_gender_data = google.visualization.arrayToDataTable(  [[ {%for item in prefix_gender_arr %}{{item|safe}}{% if forloop.counter != 5 %},{%endif %}{%endfor%}], {%for item in coupon_use_gender_arr %}{{item|safe}}{% if forloop.counter != 12 %},{%endif %} {%endfor%} ]);
+          var visit_gender_data = google.visualization.arrayToDataTable(  [[ {%for item in prefix_gender_arr %}{{item|safe}}{% if forloop.counter != 5 %},{%endif %}{%endfor%}], {%for item in visit_gender_arr %}{{item|safe}}{% if forloop.counter != 12 %},{%endif %}{%endfor%} ] );
+
+          var coupon_down_age_data = google.visualization.arrayToDataTable(  [[ {%for item in prefix_age_arr %}{{item|safe}}{% if forloop.counter != 8 %},{%endif %}{%endfor%}], {%for item in coupon_down_age_arr %}{{item|safe}}{% if forloop.counter != 12 %},{%endif %}{%endfor%} ] );
+          var coupon_use_age_data = google.visualization.arrayToDataTable(  [[ {%for item in prefix_age_arr %}{{item|safe}}{% if forloop.counter != 8 %},{%endif %}{%endfor%}], {%for item in coupon_use_age_arr %}{{item|safe}}{% if forloop.counter != 12 %},{%endif %}{%endfor%} ]  );        
+          var visit_age_data = google.visualization.arrayToDataTable(  [[ {%for item in prefix_age_arr %}{{item|safe}}{% if forloop.counter != 8 %},{%endif %}{%endfor%}], {%for item in visit_age_arr %}{{item|safe}}{% if forloop.counter != 12 %},{%endif %}{%endfor%} ] );
+
+
+          var coupon_down_gender_chart = new google.visualization.ColumnChart(document.getElementById('chart_div_coupon_down_gender'));
+          coupon_down_gender_chart.draw(coupon_down_gender_data, options);
+
+          var coupon_down_age_chart = new google.visualization.ColumnChart(document.getElementById('chart_div_coupon_down_age'));
+          coupon_down_age_chart.draw(coupon_down_age_data, options);
+
+          var coupon_use_gender_chart = new google.visualization.ColumnChart(document.getElementById('chart_div_coupon_use_gender'));
+          coupon_use_gender_chart.draw(coupon_use_gender_data, options);
+
+          var coupon_use_age_chart = new google.visualization.ColumnChart(document.getElementById('chart_div_coupon_use_age'));
+          coupon_use_age_chart.draw(coupon_use_age_data, options);
+
+          var visit_gender_chart = new google.visualization.ColumnChart(document.getElementById('chart_div_visit_gender'));
+          visit_gender_chart.draw(visit_gender_data, options);    
+          
+          var visit_age_chart = new google.visualization.ColumnChart(document.getElementById('chart_div_visit_age'));
+          visit_age_chart.draw(visit_age_data, options);
+        
+        {% else %}
+          var coupon_down_gender_data = google.visualization.arrayToDataTable( [{% for item in coupon_down_gender_arr %}[{% for sub in item %}{{sub|safe}} {% if forloop.counter != 2 %},{%endif%}{% endfor %}]{% if forloop.counter != 4 %},{%endif%}{% endfor %}] ); 
+          var coupon_down_age_data = google.visualization.arrayToDataTable( [{% for item in coupon_down_age_arr %}[{% for sub in item %}{{sub|safe}} {% if forloop.counter != 2 %},{%endif%}{% endfor %}] {% if forloop.counter != 7 %},{%endif %}{% endfor %}] );
+
+          var coupon_use_gender_data = google.visualization.arrayToDataTable( [{% for item in coupon_use_gender_arr %}[{% for sub in item %}{{sub|safe}} {% if forloop.counter != 2 %},{%endif%}{% endfor %}]{% if forloop.counter != 4 %},{%endif %}{% endfor %}] );
+          var coupon_use_age_data = google.visualization.arrayToDataTable( [{% for item in coupon_use_age_arr %}[{% for sub in item %}{{sub|safe}}{% if forloop.counter != 2 %},{%endif%}{% endfor %}]{% if forloop.counter != 7 %},{%endif %}{% endfor %}] );        
+
+          var visit_gender_data = google.visualization.arrayToDataTable( [{% for item in visit_gender_arr %}[{% for sub in item %}{{sub|safe}}{% if forloop.counter != 2 %},{%endif%}{% endfor %}]{% if forloop.counter != 4 %},{%endif %}{% endfor %}] );
+          var visit_age_data = google.visualization.arrayToDataTable( [{% for item in visit_age_arr %}[{% for sub in item %}{{sub|safe}}{% if forloop.counter != 2 %},{%endif%}{% endfor %}]{% if forloop.counter != 7 %},{%endif %}{% endfor %}] );
+
+          {% if coupon_down_gender == 1 %} 
+          var coupon_down_gender_chart = new google.visualization.PieChart(document.getElementById('chart_div_coupon_down_gender'));
+          coupon_down_gender_chart.draw(coupon_down_gender_data, options);
+          {% endif %}
+
+          {% if coupon_down_age == 1 %} 
+          var coupon_down_age_chart = new google.visualization.PieChart(document.getElementById('chart_div_coupon_down_age'));
+          coupon_down_age_chart.draw(coupon_down_age_data, options);
+          {% endif %}
+
+          {% if coupon_use_gender == 1 %}
+          var coupon_use_gender_chart = new google.visualization.PieChart(document.getElementById('chart_div_coupon_use_gender'));
+          coupon_use_gender_chart.draw(coupon_use_gender_data, options);
+          {% endif %}
+
+          {% if coupon_use_age == 1 %}
+          var coupon_use_age_chart = new google.visualization.PieChart(document.getElementById('chart_div_coupon_use_age'));
+          coupon_use_age_chart.draw(coupon_use_age_data, options);
+          {% endif %}
+          
+          {% if visit_gender == 1 %}
+          var visit_gender_chart = new google.visualization.PieChart(document.getElementById('chart_div_visit_gender'));
+          visit_gender_chart.draw(visit_gender_data, options);
+          {% endif %}
+                    
+          {% if visit_age == 1 %}
+          var visit_age_chart = new google.visualization.PieChart(document.getElementById('chart_div_visit_age'));
+          visit_age_chart.draw(visit_age_data, options);
+          {% endif %}
+
+        {% endif %}        
+      }
+    </script>
+
+{% include "top.html" %} 
+{% include "left.html" %}
+<form id="statistics_form" {%if tab.all == "on" %}action="/statistics/all/"{%elif tab.years == "on" %}action="/statistics/years/"{%elif tab.months == "on" %}action="/statistics/months/"{%elif tab.days == "on" %}action="/statistics/days/"{%else%}action="/statistics/months/"{%endif%} method="post" autocomplete="off" enctype="multipart/form-data">
+
+{% csrf_token %}
+  <div id="contents">
+    <h1>전체통계</h1>
+	  <ul class="Tabwrap">
+      <li class="{{ tab.all }}" id="all"><a href="/statistics/all">전체</a></li>
+      <li class="{{ tab.years }}" id="years"><a href="/statistics/years">연간</a></li>
+      <li class="{{ tab.months }}" id="months"><a href="/statistics/months">월간</a></li>
+      <li class="{{ tab.days }}" id="days"><a href="/statistics/days">일간</a></li>
+    </ul>
+    <div class="Tabline"></div>
+    <div class="tblview2">
+    {% if tab.years == "on" or tab.months == "on" or tab.days == "on" %} 
+      <select class="text w90" name="years" class="text" onchange="statistics_form.submit();">
+      {% for item in funing_years %}<option name="years" value="{{item}}" {%if item == sel_year %}selected{% endif %}>{{item}}년</option>{%endfor%}   
+      </select>
+    {% endif %}
+
+    {% if tab.days == "on" %}
+      <select class="text w90" name="months" class="text" onchange="statistics_form.submit();">
+      {% for item in months %}
+        <option name="months" value="{{item}}" {%if item == sel_month %}selected{% endif %}>{{item}}월</option>
+      {%endfor%}
+      </select>
+      <select class="text w90" name="days" class="text" onchange="statistics_form.submit();">
+      {% for item in days %}
+        <option name="days" value="{{item}}" {%if item == sel_day %}selected{% endif %}>{{item}}일</option>
+      {%endfor%}
+      </select>
+    {% endif %}   
+    
+  </div>
+    <div class="half">
+      <div class="graph1"><div class="title">쿠폰다운로드/ 성별</div><div class= "innergraph1" id="chart_div_coupon_down_gender" >{% if coupon_down_gender == 0 %}<div style="padding:100px 0 0 130px; color:#bbb; font-size: 20px;">데이터없음</div>{%endif %}</div></div>
+      <div class="graph1"><div class="title">쿠폰다운로드/ 나이</div><div class="innergraph1" id="chart_div_coupon_down_age" >{% if coupon_down_age == 0 %}<div style="padding:100px 0 0 130px; color:#bbb; font-size: 20px;">데이터없음</div>{%endif %}</div></div> 
+      <div class="graph1"><div class="title">쿠폰사용/ 성별</div><div class="innergraph1 " id="chart_div_coupon_use_gender">{% if coupon_use_gender == 0 %}<div style="padding:100px 0 0 130px; color:#bbb; font-size: 20px;">데이터없음</div>{%endif %}</div></div> 
+      <div class="graph1"><div class="title">쿠폰사용/ 나이</div><div class="innergraph1" id="chart_div_coupon_use_age" >{% if coupon_use_age == 0 %}<div style="padding:100px 0 0 130px; color:#bbb; font-size: 20px;">데이터없음</div>{%endif %}</div></div> 
+      <div class="graph1"><div class="title">방문자/ 성별</div><div class="innergraph1" id="chart_div_visit_gender" >{% if visit_gender == 0 %}<div style="padding:100px 0 0 130px; color:#bbb; font-size: 20px;">데이터없음</div>{%endif %}</div></div> 
+      <div class="graph1"><div class="title">방문자/ 나이</div><div class="innergraph1" id="chart_div_visit_age" >{% if visit_age == 0 %}<div style="padding:100px 0 0 130px; color:#bbb; font-size: 20px;">데이터없음</div>{%endif %}</div></div> 
+	 </div>
+  </div>
+</div>
+</form>
+{% include "footer.html" %}
+</body>
+</html>
+{% endspaceless %}

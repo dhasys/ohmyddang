@@ -1,0 +1,26 @@
+{% if user.is_staff == 1 %}
+<div id="wrap">
+  <div id="left">  	
+    <ul {% if "/store/" in request.path %}class="sel"{% endif %}><a href="/store/list">가맹점관리</a></ul>
+	<ul {% if "/notice/" in request.path %}class="sel"{% endif %}><a href="/notice/list">공지사항</a></ul>
+	<ul {% if "/push/" in request.path %}class="sel"{% endif %}><a href="/push/list">알림</a></ul>
+	<ul {% if "/board/" in request.path %}class="sel"{% endif %}><a href="/board/list">고객센터</a></ul>
+	<ul {% if "/member/" in request.path %}class="sel"{% endif %}><a href="/member/list">일반회원관리</a></ul>
+	<ul {% if "/point/register/" in request.path %}class="sel"{% endif %}><a href="/point/register">포인트관리</a></ul>
+	<ul {% if "/point/list/" in request.path %}class="sel"{% endif %}><a href="/point/list">결제내역</a></ul>	
+	<ul {% if "/statistics/" in request.path %}class="sel"{% endif %}><a href="/statistics/">전체통계</a></ul>	
+  </div>
+{% else %}
+<div id="wrap">
+  <div id="left">
+    <ul {% if "/store/" in request.path %}class="sel"{%endif%}><a href="/">가맹점정보</ul>
+	<ul {% if "/notice/" in request.path %}class="sel"{% endif %}><a href="/notice/list/">공지사항</a></ul>
+	<ul {% if "/coupon/" in request.path %}class="sel"{% endif %}><a href="/coupon/list/publish"> 쿠폰관리 </a></ul>
+	<ul {% if "/review/" in request.path %}class="sel"{% endif %}><a href="/review/list">리뷰관리</a></ul>	
+	<ul {% if "/board/" in request.path %}class="sel"{% endif %}><a href="/board/list">고객센터</a></ul>
+	<ul {% if "/point/payment" in request.path %}class="sel"{% endif %}><a href="/point/payment">포인트구매</a></ul>
+	<ul {% if "/point/list" in request.path %}class="sel"{% endif %}><a href="/point/list">결제내역</a></ul>	
+	<ul {% if "/statistics/" in request.path %}class="sel"{% endif %}><a href="/statistics">통계</a></ul>
+	<ul {% if "/info/" in request.path %}class="sel"{% endif %}><a href="#" onclick="javascript:info_popup();">이용안내</a></ul>
+  </div>
+{% endif %}

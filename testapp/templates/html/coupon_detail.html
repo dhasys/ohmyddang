@@ -1,0 +1,84 @@
+{% include "header.html" %}
+<body> 
+{% include "top.html" %}
+{% include "left.html" %}
+<form id="coupon_register_form" action="/coupon/register/save/" method="post" autocomplete="off" enctype="multipart/form-data" onsubmit="return validate_coupon_save();">
+{% csrf_token %}
+<input type="hidden" id="form_type" name="form_type" value= "{{ mode }}" />
+<input type="hidden" id="c_id" name="c_id" value= "{{ c_id }}" />
+<input type="hidden" id="act_date" name="act_date" />
+<input type="hidden" id="exp_date" name="exp_date" />
+  <div id="contents">  	
+    <h1>쿠폰관리 - 상세정보</h1>
+    <table class="tbl">
+      <colgroup>
+        <col width="173px" />
+        <col width="*">
+      </colgroup>
+      <tr>
+        <th class="first th_border2 Lft"><strong class="point">쿠폰명</strong></th>
+        <td class="Lft">{{ coupon.name }}</td> 
+      </tr>
+      <tr>
+        <th class="first th_border2 Lft"><strong class="point">쿠폰 소개글</strong></th>
+        <td class="Lft">{{ coupon.description }}</td>       
+      </tr>
+      <tr>
+        <th class="first th_border2 Lft"><strong class="point">쿠폰개수</strong></th>
+        <td class="Lft">{{ coupon.count }}{% if coupon.count %} 개{% endif %}</td>        
+      </tr>
+      {% if coupon.discount_percentage == 0 %}
+      <tr>
+        <th class="first th_border2 Lft"><strong class="point">판매원가</strong></th>
+        <td class="Lft">{{ coupon.original_price }} 원</td>          
+      </tr>
+      <tr>
+        <th class="first th_border2 Lft"><strong class="point">할인가</strong></th>
+        <td class="Lft">{{ coupon.discount_price }} 원</td> 
+      </tr>
+      {% else %}
+      <tr>
+        <th class="first th_border2 Lft"><strong class="point">할인율</strong></th>
+        <td class="Lft">{{ coupon.discount_percentage }} %</td> 
+      </tr>
+      {% endif %}
+      
+      
+      <tr>
+        <th class="first th_border2 Lft"><strong class="point">옵션</strong></th>
+        <td class="Lft"></td> 
+      </tr>
+      
+      {% for opt in coupon.options.all %}
+  	  <tr>
+        <th class="first th_border2 Lft"><strong class="point">{{ opt.option_name }}</strong></th>
+        <td class="Lft">  {{ opt.option_count }} 개   </td> 
+      </tr>
+      {% endfor %}
+      
+	  <tr>
+        <th class="first th_border2 Lft"><strong>쿠폰이미지</strong></th>
+        <td class="Lft vertical_t">          
+		  <div>
+            <div class="coupon_photo">{%if coupon.image %}<img src="{{ coupon.image.original_image.url}}" class="coupon_img">{%endif%}</div>            
+          </div>
+        </td> 
+      </tr> 
+    </table>
+    <div class="bnarea">
+	  <div class="floatRight">
+        <input type="button" class="btn_gray_h28 w90" value="목록" {% if coupon_status == 1 %}onclick="location.href='/coupon/list/publish'"{% elif coupon_status == 2 %}onclick="location.href='/coupon/list/publishwait'"{% elif coupon_status == 3 %}onclick="location.href='/coupon/list/publishstop'"{% elif coupon_status == 4 %}onclick="location.href='/coupon/list/registerwait'"{% elif coupon_status == 22 %}onclick="location.href='/coupon/list/publishwait'"{% endif %} />
+        {% if coupon_status == 2 %}
+        <input type="button" class="btn_gray_h28 w90" value="수정" onclick="location.href='/coupon/modify/{{ coupon.id }}'" />
+        {% elif coupon_status == 4 %}
+        <input type="button" class="btn_gray_h28 w90" value="재등록" onclick="location.href='/coupon/modify/{{ coupon.id }}'" />
+        {% endif %}        
+      </div>
+    </div>    
+  </div>
+</div>
+</form>
+{% include "footer.html" %}
+</body>
+</html>
+

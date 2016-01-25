@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=euc-kr">
+<title>퍼닝-관리자시스템</title>
+<link rel="stylesheet" href="/static/css/style.css" />
+<script language="JavaScript">
+
+function notice_setCookie( name, value, expiredays )
+{
+    var todayDate = new Date();
+    todayDate.setDate( todayDate.getDate() + expiredays );
+    document.cookie = name + "=" + escape( value ) + "; path=/; expires=" + todayDate.toGMTString() + ";"
+}
+
+function notice_closeWin() 
+{   var check = document.getElementsByName("Notice");
+    if ( check[0].checked ) {
+        notice_setCookie( "Notice", "done" , 1); // 1=하룻동안 공지창 열지 않음
+    }
+    window.close();
+}
+</script>
+
+</head>
+
+<body>
+
+<img src="/static/img/popup_start.gif" usemap="#Map" border="0">
+<map name="Map">
+  <area shape="rect" coords="491,25,512,46" href="#" onclick="window.close()">
+</map>
+<div style="width:535px; text-align:center;">
+<input type="checkbox" name="Notice">다음부터 이창을 열지않음 <input type="button" name="close" OnClick="notice_closeWin()" value="닫기">
+
+</div>
+
+</body>
+</html>

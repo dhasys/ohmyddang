@@ -1,0 +1,56 @@
+{% include "header.html" %}
+<body>
+{% include "top.html" %}
+{% include "left.html" %}
+  <div id="contents">
+    <h1>일반회원관리 - 상세</h1>
+    <table class="tbl">
+      <colgroup>
+        <col width="173px" />
+        <col width="*">
+      </colgroup>
+      <tr>
+        <th class="first th_border2 Lft"><strong>ID</strong></th>
+        <td class="Lft">{{ member.udid }}</td> 
+      </tr>
+      <tr>
+        <th class="first th_border2 Lft"><strong>닉네임</strong></th>
+        <td class="Lft">{{ member.nickname }}</td> 
+      </tr>
+      <tr>
+        <th class="first th_border2 Lft"><strong>성별</strong></th>
+        <td class="Lft">{% if member.gender == 1 %}여{% elif member.gender == 0 %}남{% else %} 알수없음 {% endif %}</td> 
+      </tr>
+      <tr>
+        <th class="first th_border2 Lft"><strong>생년월일</strong></th>
+        <td class="Lft">{{ member.birthday|date:"Y년 n월 d일" }}</td> 
+      </tr>      
+      <tr>
+        <th class="first th_border2 Lft"><strong>가입일</strong></th>
+        <td class="Lft">{{ member.regdate|date:"Y.n.d A h:i" }}</td> 
+      </tr>
+      <tr>
+        <th class="first th_border2 Lft"><strong>쿠폰다운수</strong></th>
+        <td class="Lft">{{coupon_down_cnt}}개</td> 
+      </tr>
+      <tr>
+        <th class="first th_border2 Lft"><strong>쿠폰사용수</strong></th>
+        <td class="Lft">{{coupon_used_cnt}}개</td> 
+      </tr>      
+    </table>
+  <!-- 버튼, 페이저 -->
+    <div class="bnarea">
+      <div class="floatLeft">
+        <!-- <input type="button" class="btn_gray_h28 w90" value="회원삭제" /> -->
+      </div>
+      <div class="floatRight">
+		    <input type="button" class="btn_gray_h28 w90" value="정보수정" onclick="location.href='/member/modify/{{ member.id }}'" />
+        <input type="button" class="btn_gray_h28 w90" value="목록" onclick="location.href='/member/list'"/>
+      </div>
+    </div>    
+  </div>
+</div>
+{% include "footer.html" %}
+</body>
+</html>
+

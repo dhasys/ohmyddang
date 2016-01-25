@@ -1,0 +1,67 @@
+{% include "header.html" %}
+<script >
+function search_submit(){
+  $('#store_list_form').submit();
+}
+</script>
+<body>
+{% include "top.html" %}
+{% include "left.html" %}
+  <div id="contents">
+    <h1>가맹점목록</h1>
+    <div class="floatRight vertical_t">
+      <form id="store_list_form" action="/store/list/" method="post" autocomplete="off"  >
+      {% csrf_token %}
+        <input type="text" class="text w6" name="search_text" value=""/><input type="button" class="search_bn" style="margin-right:0 !important;" onclick="search_submit();"/>
+      </form>
+    </div>
+    <table class="tbl">
+      <colgroup>
+        <col width="*" />
+        <col width="*" />
+        <col width="90px" />
+        <col width="90px" />
+        <col width="90px" />
+        <col width="120px" />
+      </colgroup>
+      <tr>
+        <th class="first">ID</th>
+        <th>가맹점명</th>
+        <th>가맹점타입</th>
+        <th>등록쿠폰수</th>
+        <th>대표자</th>
+        <th>연락처</th>
+      </tr>
+      {% for item in documents %}
+        <tr>
+          <td class="first"> {{ item.id }} </td>
+          <td> <a href="/store/detail/{{item.id}}">{{ item.store_name|truncatechars:20 }}</a></td>
+          <td>{{item.store_type}}</td>
+          <td>{{item.coupon_count}}</td>
+          <td>{{item.president_name|truncatechars:8}}</td>
+          <td>{{item.manager_phone}}</td>
+        </tr>
+      {% endfor %}   
+    </table>
+	<div class="bnarea">
+		<div class="floatRight">
+      <input id="store_list_register" type="button" class="btn_orange_h28 w90" value="가맹점추가" onclick="location.href='/store/register/'"/>
+		</div>
+		<div class="paging">
+			<span class="btn"><a href="/store/list/page/{{ start_page }}"><img src="/static/img/page_left.png" />&nbsp;첫페이지</a></span>
+      {% for item in paging_list %}
+        {% if current_page = item %}
+			   <span><strong>{{ item }}</strong></span>
+        {% else %}
+        <span><a href="/store/list/page/{{ item }}">{{ item }}</a></span>
+        {% endif %}
+      {% endfor %}
+			<span class="btn"><a href="/store/list/page/{{ end_page }}">끝페이지&nbsp;<img src="/static/img/page_right.png" /></a></span>
+		</div>
+	</div>
+  </div>
+</div>
+{% include "footer.html" %}
+</body>
+</html>
+

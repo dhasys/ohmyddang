@@ -1,0 +1,30 @@
+{% include "header.html" %}
+<body id="login_Wrap">
+  <div class="Wrap">
+     <div class="Area">
+       <div class="Left"></div>
+       <form id="login_form" method="post" action=".">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}" />
+       <div class="Right">
+         <li class="login">
+           <input type="text" class="idpw" name="username"/><!-- <input type="checkbox" /> ID 저장 -->
+         </li>
+         <li class="pw"><input type="password" class="idpw" name="password"/><input type="submit" class="loginbtn" value="로그인" /></li>
+         <h4></h4>
+        {% if form.errors %}
+          <div class="newjoin"><b style="color:#FF0000;">아이디 혹은 패스워드가 틀렸습니다.</b></div>
+        {% endif %}         
+         <div class="newjoin"><b><a href="/store/register/">퍼닝 가맹점으로 등록하기</a></b>&nbsp;<span style="color:#d7672a;">|</span>&nbsp;<b><a href="#" onclick="javascript:info_popup();">이용안내</a></b></div>
+       </div>
+      </form>
+    </div>    
+  </div>
+  <div class="CopyWrite">
+    <img src="/static/img/login_bottom_img.png" border="0" usemap="#Map" />
+    <map name="Map" id="Map">
+      <area shape="rect" coords="405,20,492,37" href="#" onclick="javascript:assent_popup()" />
+    </map>
+  </div>
+</body>
+</html>
